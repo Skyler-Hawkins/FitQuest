@@ -1,6 +1,10 @@
 import Head from "next/head";
+import Link from "next/link";  
 // import {Button} from 'react-bootstrap';
 import styled from 'styled-components';
+
+// import FitQuest from './FitQuest.png'
+
 
 
 
@@ -42,7 +46,7 @@ const Title = styled.h1`
 `
 
 // a button of this type is defined, need to set up event handlers for
-// it as well... inheritance might be important, read that styled-components
+// it as well... inheritance might be important, read that styled-components         
 // can inheret from other styled componentsd
 // this button doesn't appear to have an onclick event
 const ButtonFancy = styled.button`
@@ -68,15 +72,32 @@ export default function Login() {
             {/* Put meta-information here, likely to need that */}
         <title>Login Page</title>
         </Head>
+        <img src = "./FitQuest.png"></img>
         {/*Next, need to make a sign-up vs sign-in form, 
         make DEFAULT a sign-in page, then button that says
         "Don't have an account? Sign up here!" */}
         <Title>Welcome To FitQuest</Title>
 
-        <Container> Please enter your UserId and password below </Container>  
+       <LoginContainer>
+          <LoginBox>
+            <h1>Enter your username and password below</h1>
+            <form>
+                <InputGroup>
+                    <Input type= "text" placeHolder = "Username"/>
+                </InputGroup>
+                <InputGroup>
+                    <Input type = "password" placeHolder = "Password"/>
+                </InputGroup>
+                <InputGroup>
+                    <LoginButton> Log In </LoginButton>
+                </InputGroup>
+            </form>
+          </LoginBox>
+       </LoginContainer>
+
+        <h2><Link href="/">Back to main file</Link></h2>
 
 
-        <Wrapper><ButtonFancy> Special button </ButtonFancy></Wrapper>
 
 
         <button onClick = {handleClick}>Click me!</button>
@@ -88,6 +109,50 @@ export default function Login() {
 
 }
 
+// CSS FOR THE LOGIN PAGE
+// should replace pixel paddings with relative sizing measurements     
 
+const LoginContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+`
+
+const LoginBox = styled.div`
+    width: 40%;
+    padding: 5%;
+    align-items: center;
+    border-radius: 3%;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);                             
+
+`
+
+const InputGroup = styled.div`
+width: 100%; // Ensure input group takes full width of parent
+margin-bottom: 5%;
+display: flex;
+justify-content: center; // Center the input elements horizontally
+`;
+
+const Input = styled.input`
+    width: 100%;
+    padding: 5%;
+`
+
+const LoginButton = styled.button`
+    width: 100%;
+`
+// End of Login CSS
+
+const Holder = styled.div`
+    display:flex;
+    width: 100%;
+    background-color: grey;
+    justify-content: space-between;
+    padding: 1vw;
+`
 
 

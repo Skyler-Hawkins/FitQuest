@@ -1,7 +1,15 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Inter } from "next/font/google";               
 import styled from 'styled-components';
+
+
+import NavBar from "@/components/NavBar";
+
+
+
+// importing for a link to another page
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 // npm run dev
@@ -15,6 +23,14 @@ const Container = styled.div`
 
 
 
+const ParentContainer = styled.div`
+*{
+  // padding: 0;
+  flex-direction: row;
+}
+`
+
+
 export default function Home() {
   return (
     <>
@@ -24,12 +40,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>CMPSC 263 DEMO</div>
-      <Container>CMPSC 263 DEMO</Container>
+      {/* This h1 is a LINK to the test JS file  */}
+      {/* {/* <h1><Link href="/test">Click to go to Dashboard</Link> </h1> */}
+
+      <ParentContainer>
+        <NavBar/>
+        <h2><Link href="/login">Click to go to Login Page</Link> </h2>
+      <Container>CMPSC 263 DEMO</Container> 
+      </ParentContainer>
+
+  
+
     </>
   );
 }
-
-
-
 
