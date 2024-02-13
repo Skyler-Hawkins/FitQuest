@@ -27,6 +27,7 @@ const ParentContainer = styled.div`
 *{
   // padding: 0;
   flex-direction: row;
+  font: Roboto;
 }
 `
 
@@ -45,6 +46,26 @@ export default function Home() {
 
       <ParentContainer>
         <NavBar/>
+
+
+      <BodyContainer>
+        <DescriptionAndImageContainer>
+        <Description>
+        Welcome to FitQuest! FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
+        It provides a platform for users to track their workouts, set goals, and monitor their progress.
+        With FitQuest, users can create personalized workout plans, access a library of exercises,
+        and join challenges to stay motivated and engaged. Whether you're a beginner or an experienced fitness enthusiast, FitQuest is here to support you
+        on your fitness journey and help you reach your full potential.
+        </Description>      
+        <ImgContainer>
+        <img src = "FitQuestLogo.jpg"/>
+        </ImgContainer> 
+        </DescriptionAndImageContainer>
+          OTHER stuff
+      </BodyContainer>
+
+
+
         <h2><Link href="/login">Click to go to Login Page</Link> </h2>
       <Container>CMPSC 263 DEMO</Container> 
       </ParentContainer>
@@ -55,3 +76,51 @@ export default function Home() {
   );
 }
 
+// Organizing into various containers, somewhat messy as of 2/13
+
+const BodyContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #70d158;
+`;
+
+const DescriptionAndImageContainer = styled.div`
+  margin-top: 10vw;
+  display: flex;
+  justify-content: space-between;
+`;
+
+
+const ImgContainer = styled.div`
+  display: inline-block;
+  border-radius: 3%;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);      
+  margin-bottom: 0vw;
+  margin-top: 0vw;                       
+  margin-right: 10vw;
+  background-color: #042131;
+  padding: .5vw;
+`;
+
+
+const Description = styled.div`
+  height: 20w;
+  width: 50%;
+  // background-color: #2aad09;
+  border-radius: 3%;
+  margin-right: 2vw;
+  margin-left: .1vw;
+  padding: 2vw;
+  font-family: 'Roboto', sans-serif;
+`;
+
+
+
+
+// Need to make good functional homepage
+
+// start with a textbox description of the app, need some nice styling

@@ -10,6 +10,7 @@ const NavBar = () => {
     <Holder>
     <LogoBox>
         FitQuest
+        {/* <img src = "FitQuestLogo.jpg"/> */}
     </LogoBox>
     <NavButtonHolder>
         <NavElement>

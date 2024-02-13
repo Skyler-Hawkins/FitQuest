@@ -72,13 +72,19 @@ export default function Login() {
             {/* Put meta-information here, likely to need that */}
         <title>Login Page</title>
         </Head>
-        <img src = "./FitQuest.png"></img>
+
+
+        <img src = "./FitQuestLogo.jpg"></img>
         {/*Next, need to make a sign-up vs sign-in form, 
         make DEFAULT a sign-in page, then button that says
         "Don't have an account? Sign up here!" */}
-        <Title>Welcome To FitQuest</Title>
-
+        
+        <wholeContainer>
+        <TitleContainer>
+            <Title>Welcome To FitQuest</Title>
+        </TitleContainer>
        <LoginContainer>
+       
           <LoginBox>
             <h1>Enter your username and password below</h1>
             <form>
@@ -94,13 +100,9 @@ export default function Login() {
             </form>
           </LoginBox>
        </LoginContainer>
-
-        <h2><Link href="/">Back to main file</Link></h2>
-
-
-
-
-        <button onClick = {handleClick}>Click me!</button>
+       </wholeContainer>
+        {/* <h2><Link href="/">Back to main file</Link></h2>
+        <button onClick = {handleClick}>Click me!</button> */}
 
         {/* THIS here is a react-bootstrap imported button */}
         {/* <Button variant="contained">Sign Up </Button> */}
@@ -112,11 +114,22 @@ export default function Login() {
 // CSS FOR THE LOGIN PAGE
 // should replace pixel paddings with relative sizing measurements     
 
+const wholeContainer = styled.div`
+    height: 100%;
+`
+
+
+
+const TitleContainer = styled.div`
+    font-size: 1.6em;
+    background-color: #f0f2f5;
+`
+
 const LoginContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 90vh;
     background-color: #f0f2f5;
 `
 
@@ -124,8 +137,9 @@ const LoginBox = styled.div`
     width: 40%;
     padding: 5%;
     align-items: center;
-    border-radius: 3%;
     background-color: white;
+    border-radius: 3%;
+ 
     box-shadow: 0 0 10px rgba(0, 0, 0, .4);                             
 
 `
@@ -133,6 +147,7 @@ const LoginBox = styled.div`
 const InputGroup = styled.div`
 width: 100%; // Ensure input group takes full width of parent
 margin-bottom: 5%;
+margin-top: 5%;
 display: flex;
 justify-content: center; // Center the input elements horizontally
 `;
@@ -143,7 +158,8 @@ const Input = styled.input`
 `
 
 const LoginButton = styled.button`
-    width: 100%;
+    width: 30%;
+    padding: 3%;
 `
 // End of Login CSS
 
