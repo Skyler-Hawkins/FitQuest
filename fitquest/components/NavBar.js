@@ -5,12 +5,16 @@ import styled from 'styled-components'
 
 
 const NavBar = () => {
+    // ADD in a button for the fitquest logo that links to the index.js file (homepage)
+
+
   return (
     <Container>
     <Holder>
     <LogoBox>
-        FitQuest
-        {/* <img src = "FitQuestLogo.jpg"/> */}
+        
+        <NavHomeButton> FitQuest</NavHomeButton>
+
     </LogoBox>
     <NavButtonHolder>
         <NavElement>
@@ -29,6 +33,8 @@ const NavBar = () => {
 }
 
 
+
+
 const Container = styled.div`
 
     width: 98wv;
@@ -39,11 +45,31 @@ const Container = styled.div`
     // padding-top: 1vw;
     // padding-left: 1vw;
     // padding-right: 1vw;
+
+
+
+
 `
+
+const NavHomeButton = styled.button`
+    all: unset;
+    padding: 1.5vw;
+    font-size: 4.5vw;
+    // background-color: gainsboro;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    border-radius: 0.5vw;
+
+    &:hover{
+        background-color: #C0C0C0;
+    }
+`;
 const Holder = styled.div`
     display:flex;
     width: 100%;
     background-color: grey;
+    
     justify-content: space-between;
     padding: 1vw;
 `

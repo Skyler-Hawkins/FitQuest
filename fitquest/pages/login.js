@@ -3,7 +3,7 @@ import Link from "next/link";
 // import {Button} from 'react-bootstrap';
 import styled from 'styled-components';
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 // import FitQuest from './FitQuest.png'
 
 
@@ -19,15 +19,45 @@ function handleClick() {
 
 
 
-export default function Login() {
-    //DEFINING HOOKS
-    const [Button, attemptLogin] = useState("stuff");
 
-    const handleAttemptLogin = () => {
-        attemptLogin("Login attempt was made");
-        // not actually doing much yet
-        console.log('Login attempt was made');
-    }
+// on button click, need to: 
+// 1) check if user and password are 'correct' (to come later)
+// 2) if correct, redirect to the main page
+// 3) if incorrect, allow form to refresh and show error message
+
+
+export default function Login() {
+    //DEFINING HOOKS (first for button)
+    // also. since in a form group, will refresh page every time button is clicked
+
+    const usernameRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const handleLogin = (event) => {
+
+        // need to figure out how to conditionally prevent this. if password is
+        // incorrect, then prevent default. if correct, then allow refresh
+        event.preventDefault();
+
+
+        const username = usernameRef.current.value;
+        const password = passwordRef.current.value;
+
+        console.log('Username:', username);
+        console.log('Password:', password);
+
+        // Perform login logic here
+
+        
+    };
+
+    
+
+    // const handleAttemptLogin = () => {
+    //     attemptLogin("Login attempt was made");
+    //     // not actually doing much yet
+    //     console.log('Login attempt was made');
+    // }
 
     return (
         <>
@@ -42,7 +72,7 @@ export default function Login() {
         make DEFAULT a sign-in page, then button that says
         "Don't have an account? Sign up here!" */}
         
-        <wholeContainer>
+        <WholeContainer>
         <TitleContainer>
             <Title>Welcome To FitQuest</Title>
         </TitleContainer>
@@ -52,24 +82,21 @@ export default function Login() {
             <h1>Enter your username and password below</h1>
             <form>
                 <InputGroup>
-                    <Input type= "text" placeHolder = "Username"/>
+                    <Input type= "text" placeholder = "Username" ref = {usernameRef}/>
                 </InputGroup>
                 <InputGroup>
-                    <Input type = "password" placeHolder = "Password"/>
+                    <Input type = "password" placeholder = "Password" ref = {passwordRef}/>
                 </InputGroup>
                 <InputGroup>
                     
-                    <LoginButton> Log In </LoginButton>
+
+                    <LoginButton onClick={(event) => handleLogin(event)}> Log In </LoginButton>
+                   
                 </InputGroup>
             </form>
           </LoginBox>
        </LoginContainer>
-       </wholeContainer>
-        {/* <h2><Link href="/">Back to main file</Link></h2>
-        <button onClick = {handleClick}>Click me!</button> */}
-
-        {/* THIS here is a react-bootstrap imported button */}
-        {/* <Button variant="contained">Sign Up </Button> */}
+       </WholeContainer>
         </>
     )
 
@@ -81,7 +108,7 @@ export default function Login() {
 
 
 
-const wholeContainer = styled.div`
+const WholeContainer = styled.div`
     height: 100%;
 `
 

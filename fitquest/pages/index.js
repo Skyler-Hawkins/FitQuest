@@ -47,11 +47,12 @@ export default function Home() {
       <ParentContainer>
         <NavBar/>
 
-
+      <TitleContainer> Welcome To FitQuest!</TitleContainer>
       <BodyContainer>
         <DescriptionAndImageContainer>
           <Description>
-              Welcome to FitQuest! FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
+              <h1>About Us</h1> <br/>
+              FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
               It provides a platform for users to track their workouts, set goals, and monitor their progress.
               With FitQuest, users can create personalized workout plans, access a library of exercises,
               and join challenges to stay motivated and engaged. Whether you're a beginner or an experienced fitness enthusiast, FitQuest is here to support you
@@ -64,6 +65,7 @@ export default function Home() {
         <h1>Fitness</h1>
         <DescriptionAndImageContainer>
             <Description>
+            <h1>The Fitness Experience</h1> <br/>
               The fitness challenge functionality of the FitQuest app allows users to track their fitness data and compete in challenges. 
               Users can set goals, monitor their progress, and participate in various challenges to stay motivated and engaged. 
               The app provides a platform for users to create personalized workout plans, access a library of exercises, and join challenges with friends or other users. 
@@ -85,17 +87,35 @@ export default function Home() {
 
 // Organizing into various containers, somewhat messy as of 2/13
 
+const TitleContainer = styled.div`
+  
+  font-size: 2.5em;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #70d158; //light-ish green
+
+
+  
+`;
+
+
+
+
 const BodyContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: #70d158;
+  background-color: #70d158; //light-ish green
+  position: relative;
+
 `;
 
 const DescriptionAndImageContainer = styled.div`
-  margin-top: 10vw;
+  margin-top: 6vw;
+  margin-bottom: 12vw;
   display: flex;
   justify-content: space-between;
 `;
@@ -118,6 +138,7 @@ const Description = styled.div`
   height: 20w;
   width: 50%;
    background-color: #2aad09;
+   box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
   border-radius: 3%;
   margin-right: 2vw;
   margin-left: .1vw;
