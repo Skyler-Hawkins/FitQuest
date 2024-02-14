@@ -14,9 +14,6 @@ const NavBar = () => {
     </LogoBox>
     <NavButtonHolder>
         <NavElement>
-            Home
-        </NavElement>
-        <NavElement>
             My Info
         </NavElement>
         <NavElement>
@@ -52,7 +49,7 @@ const Holder = styled.div`
 `
 const LogoBox = styled.div`
     font-size: 4.5vw;
-    font-weight: bold;
+    // font-weight: bold;
     
 `
 

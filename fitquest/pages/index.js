@@ -50,24 +50,31 @@ export default function Home() {
 
       <BodyContainer>
         <DescriptionAndImageContainer>
-        <Description>
-        Welcome to FitQuest! FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
-        It provides a platform for users to track their workouts, set goals, and monitor their progress.
-        With FitQuest, users can create personalized workout plans, access a library of exercises,
-        and join challenges to stay motivated and engaged. Whether you're a beginner or an experienced fitness enthusiast, FitQuest is here to support you
-        on your fitness journey and help you reach your full potential.
-        </Description>      
-        <ImgContainer>
-        <img src = "FitQuestLogo.jpg"/>
-        </ImgContainer> 
+          <Description>
+              Welcome to FitQuest! FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
+              It provides a platform for users to track their workouts, set goals, and monitor their progress.
+              With FitQuest, users can create personalized workout plans, access a library of exercises,
+              and join challenges to stay motivated and engaged. Whether you're a beginner or an experienced fitness enthusiast, FitQuest is here to support you
+              on your fitness journey and help you reach your full potential.
+          </Description>      
+          <ImgContainer>
+          <img src = "FitQuestLogo.jpg"/>
+          </ImgContainer> 
         </DescriptionAndImageContainer>
-          OTHER stuff
+        <h1>Fitness</h1>
+        <DescriptionAndImageContainer>
+            <Description>
+              The fitness challenge functionality of the FitQuest app allows users to track their fitness data and compete in challenges. 
+              Users can set goals, monitor their progress, and participate in various challenges to stay motivated and engaged. 
+              The app provides a platform for users to create personalized workout plans, access a library of exercises, and join challenges with friends or other users. 
+              Whether you're a beginner or an experienced fitness enthusiast, FitQuest is designed to help you achieve your fitness goals and reach your full potential.
+            </Description>
+        </DescriptionAndImageContainer>
       </BodyContainer>
 
 
 
         <h2><Link href="/login">Click to go to Login Page</Link> </h2>
-      <Container>CMPSC 263 DEMO</Container> 
       </ParentContainer>
 
   
@@ -110,7 +117,7 @@ const ImgContainer = styled.div`
 const Description = styled.div`
   height: 20w;
   width: 50%;
-  // background-color: #2aad09;
+   background-color: #2aad09;
   border-radius: 3%;
   margin-right: 2vw;
   margin-left: .1vw;
