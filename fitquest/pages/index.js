@@ -76,7 +76,6 @@ export default function Home() {
 
 
 
-        <h2><Link href="/login">Click to go to Login Page</Link> </h2>
       </ParentContainer>
 
   

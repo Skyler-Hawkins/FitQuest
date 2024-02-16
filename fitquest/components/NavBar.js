@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import link from 'next/link'
 
 
 
@@ -13,7 +14,7 @@ const NavBar = () => {
     <Holder>
     <LogoBox>
         
-        <NavHomeButton> FitQuest</NavHomeButton>
+        <NavHomeButton> <StyledLink href="/"> FitQuest</StyledLink></NavHomeButton>
 
     </LogoBox>
     <NavButtonHolder>
@@ -21,7 +22,8 @@ const NavBar = () => {
             My Info
         </NavElement>
         <NavElement>
-            Fitness
+            <StyledLink href="/Fitness">Fitness</StyledLink>
+
         </NavElement>
         <NavElement>
             other
@@ -32,9 +34,10 @@ const NavBar = () => {
   )
 }
 
-
-
-
+const StyledLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+`;
 const Container = styled.div`
 
     width: 98wv;
