@@ -1,10 +1,33 @@
 import Head from "next/head";
-import Link from "next/link";  
-// import {Button} from 'react-bootstrap';
 import styled from 'styled-components';
 import React from 'react';
 import {useState, useEffect, useRef} from 'react';
-// import FitQuest from './FitQuest.png'
+import {auth} from '@library/firebaseConfig';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+
+
+// AUTHENTICATION FROM SLIDES
+const email = "user@example.com";
+const password = "userpassword";
+
+createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+        console.log('User ${user.email} signed up successfully');
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        console.log('Error: ${errorCode} ${errorMessage}');
+          
+    })
+
+
+
 
 
 

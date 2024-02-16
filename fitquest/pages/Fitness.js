@@ -8,27 +8,56 @@ import Link from 'next/link';
 import NavBar from "@/components/NavBar";
 
 
+const ParentContainer = styled.div`
+*{
+  // padding: 0;
+  flex-direction: row;
+  font: Roboto;
+}
+`
+
 export default function Fitness() {
     return (
         <>
+          <ParentContainer>
             <NavBar/>
 
             <BodyContainer>
+              <ChallengeDescription>
+               <h1> Challenge of The Month: </h1><br/>
+                How Many Pushups Can You Do In 1 Minute?
+              </ChallengeDescription>
               <Description>
                     Add your exercises here!
-
+                <InputGroup>
+                  <Input type = "text" placeHolder = "# Pushups per minute"/>
+                </InputGroup>
               </Description>
+              <Description></Description>
             </BodyContainer>
-
-    
+            </ParentContainer>
         </>       
         );
     }
 
+    const ChallengeDescription = styled.div`
+    font-size: 1.6em;
+    
+    width: 80%;
+    text-align: center;
+    background-color: #2aad09;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+    border-radius: 3%;
+    margin-right: 2vw;
+    margin-left: .1vw;
+    padding: 2vw;
+    font-family: 'Roboto', sans-serif;
 
+    `
 
         
     const Description = styled.div`
+
     height: 20w;
     width: 50%;
     background-color: #2aad09;
@@ -50,4 +79,54 @@ export default function Fitness() {
   
   `;
 
+  /////////////// Below is copied from login.js, worrying about code org later
+  
+const LoginContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+height: 90vh;
+background-color: #f0f2f5;
+`
 
+const LoginBox = styled.div`
+width: 40%;
+padding: 5%;
+align-items: center;
+background-color: white;
+border-radius: 3%;
+
+box-shadow: 0 0 10px rgba(0, 0, 0, .4);                             
+
+`
+
+const InputGroup = styled.div`
+width: 100%; // Ensure input group takes full width of parent
+margin-bottom: 5%;
+margin-top: 5%;
+display: flex;
+justify-content: center; // Center the input elements horizontally
+`;
+
+const Input = styled.input`
+width: 100%;
+padding: 5%;
+`
+
+
+
+
+  /*
+  What I want my app to even do: 
+  Track exercises
+  Track weight
+  Compete in fitness challenges
+
+  idea: make a static 'challenge' for the time being, have users input their stats
+  (i.e. how many pushups they can do in a minute, how many squats they can do in a minute, etc.)
+  and then compare their stats to the static challenge, eventaully set up DB
+  to display top scores... 
+  
+  
+  
+  */
