@@ -1,8 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";               
+import Image from "next/image";      
 import styled from 'styled-components';
-
+import {useState, useEffect, useRef} from 'react';
 
 import NavBar from "@/components/NavBar";
 
@@ -11,8 +10,6 @@ import NavBar from "@/components/NavBar";
 // importing for a link to another page
 import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
-// npm run dev
 
 
 // Set all styled components 
@@ -32,7 +29,26 @@ const ParentContainer = styled.div`
 `
 
 
+
+
 export default function Home() {
+
+  ///////////////////////////////////////////// Note: api here does not yet work, 
+  //  having issues with pulling key correctly. Requires no api key, but CORS will not allow
+  // me to import, willl look into bypassing using a proxy server. 
+  const api_url ="https://zenquotes.io/api/today";
+  const [quote, setQuote] = useState("");
+
+  useEffect(() => {
+    getApi(api_url);
+  }, []);
+
+  function getApi(url) {
+    fetch("https://zenquotes.io/api/today", {mode: 'no_cors'})
+      .then(response => response.json())
+      .then(data => setQuote(data))
+      .catch(error => console.log(error))
+  }
   return (
     <>
       <Head>
@@ -47,9 +63,10 @@ export default function Home() {
       <ParentContainer>
         <NavBar/>
 
-      <TitleContainer> Welcome To FitQuest!</TitleContainer>
+      <TitleContainer>Welcome To FitQuest!</TitleContainer>
       <BodyContainer>
-        <DescriptionAndImageContainer>
+        {/* <Description>{quote}</Description> */}
+        {/* <DescriptionAndImageContainer> */}
           <Description>
               <h1>About Us</h1> <br/>
               FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
@@ -58,19 +75,22 @@ export default function Home() {
               and join challenges to stay motivated and engaged. Whether you're a beginner or an experienced fitness enthusiast, FitQuest is here to support you
               on your fitness journey and help you reach your full potential.
           </Description>      
-          <ImgContainer>
+          {/* <ImgContainer>
           <img src = "FitQuestLogo.jpg"/>
           </ImgContainer> 
-        </DescriptionAndImageContainer>
-        <h1>Fitness</h1>
+        </DescriptionAndImageContainer> */}
+        <TitleContainer>Fitness</TitleContainer>
         <DescriptionAndImageContainer>
             <Description>
             <h1>The Fitness Experience</h1> <br/>
-              The fitness challenge functionality of the FitQuest app allows users to track their fitness data and compete in challenges. 
-              Users can set goals, monitor their progress, and participate in various challenges to stay motivated and engaged. 
-              The app provides a platform for users to create personalized workout plans, access a library of exercises, and join challenges with friends or other users. 
-              Whether you're a beginner or an experienced fitness enthusiast, FitQuest is designed to help you achieve your fitness goals and reach your full potential.
+            The FitQuest app offers a fitness challenge feature where users can track their progress, set goals, and engage in competitions. It includes personalized workout plans, 
+            a library of exercises, and the option to join challenges with others, catering to both beginners and seasoned fitness enthusiasts aiming to reach their fitness potential.
             </Description>
+            <StyledLink href="/Fitness">
+              <ImgContainer>
+                <img src = "FitQuestLogo.jpg"/>
+              </ImgContainer> 
+            </StyledLink>
         </DescriptionAndImageContainer>
       </BodyContainer>
 
@@ -85,17 +105,25 @@ export default function Home() {
 }
 
 // Organizing into various containers, somewhat messy as of 2/13
+// Colors used: 
+// original background: #70d158; //light-ish green
+// new background: #BAEDC1 // Magand (light green)
+
+// old description background: #2aad09
+// new description background: #082834
+
+const StyledLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+`;
 
 const TitleContainer = styled.div`
-  
-  font-size: 2.5em;
+  font-size: 5.0vw;
+  padding: 3vw;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #70d158; //light-ish green
-
-
-  
+  background-color: #BAEDC1; //light-ish green  
 `;
 
 
@@ -107,7 +135,7 @@ const BodyContainer = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: #70d158; //light-ish green
+  background-color: #BAEDC1; //light-ish green
   position: relative;
 
 `;
@@ -117,31 +145,40 @@ const DescriptionAndImageContainer = styled.div`
   margin-bottom: 12vw;
   display: flex;
   justify-content: space-between;
-`;
+  align-items: center;
+
+
+  `;
+
 
 
 const ImgContainer = styled.div`
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   border-radius: 3%;
   transform: scale(1.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, .3);      
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+  width: 20vw;
+  height: 20vw;     
   margin-bottom: 0vw;
   margin-top: 0vw;                       
   margin-right: 10vw;
   background-color: #042131;
-  padding: .5vw;
+  padding: 3vw;
 `;
 
 
 const Description = styled.div`
   height: 20w;
   width: 50%;
-   background-color: #2aad09;
+   background-color: #54D074;
+   
    box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
   border-radius: 3%;
   margin-right: 2vw;
   margin-left: .1vw;
   padding: 2vw;
+  font-size: 1.2em;
   font-family: 'Roboto', sans-serif;
 `;
 

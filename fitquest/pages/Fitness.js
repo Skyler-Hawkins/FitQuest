@@ -28,12 +28,15 @@ export default function Fitness() {
                 How Many Pushups Can You Do In 1 Minute?
               </ChallengeDescription>
               <Description>
-                    Add your exercises here!
+                    Throw your hat into the ring!
                 <InputGroup>
                   <Input type = "text" placeHolder = "# Pushups per minute"/>
                 </InputGroup>
               </Description>
-              <Description></Description>
+              <Description>
+                <h1> Leaderboard</h1>
+
+              </Description>
             </BodyContainer>
             </ParentContainer>
         </>       
@@ -45,7 +48,8 @@ export default function Fitness() {
     
     width: 80%;
     text-align: center;
-    background-color: #2aad09;
+    background-color: #54D074;
+
     box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
     border-radius: 3%;
     margin-right: 2vw;
@@ -55,29 +59,72 @@ export default function Fitness() {
 
     `
 
-        
-    const Description = styled.div`
 
-    height: 20w;
-    width: 50%;
-    background-color: #2aad09;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
-    border-radius: 3%;
-    margin-right: 2vw;
-    margin-left: .1vw;
-    padding: 2vw;
-    font-family: 'Roboto', sans-serif;
-    `;
-    const BodyContainer = styled.div`
+    const TitleContainer = styled.div`
+    font-size: 5.0vw;
+    padding: 3vw;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #BAEDC1; //light-ish green  
+  `;
+  
+  
+  
+  
+  const BodyContainer = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    background-color: #70d158; //light-ish green
+    background-color: #BAEDC1; //light-ish green
     position: relative;
   
   `;
+  
+  const DescriptionAndImageContainer = styled.div`
+    margin-top: 6vw;
+    margin-bottom: 12vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+  
+    `;
+  
+  
+  
+  const ImgContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    border-radius: 3%;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+    width: 20vw;
+    height: 20vw;     
+    margin-bottom: 0vw;
+    margin-top: 0vw;                       
+    margin-right: 10vw;
+    background-color: #042131;
+    padding: 3vw;
+  `;
+  
+  
+  const Description = styled.div`
+    height: 20w;
+    width: 50%;
+    background-color: #54D074;
+     
+     box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+    border-radius: 3%;
+    margin-right: 2vw;
+    margin-left: .1vw;
+    padding: 2vw;
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+  `;
+  
 
   /////////////// Below is copied from login.js, worrying about code org later
   
@@ -111,6 +158,7 @@ justify-content: center; // Center the input elements horizontally
 const Input = styled.input`
 width: 100%;
 padding: 5%;
+background-color: gainsboro;
 `
 
 

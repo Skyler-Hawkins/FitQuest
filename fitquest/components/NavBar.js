@@ -19,14 +19,10 @@ const NavBar = () => {
     </LogoBox>
     <NavButtonHolder>
         <NavElement>
-            My Info
+            <StyledLink href="/My_Info">My Info</StyledLink>
         </NavElement>
         <NavElement>
             <StyledLink href="/Fitness">Fitness</StyledLink>
-
-        </NavElement>
-        <NavElement>
-            other
         </NavElement>
     </NavButtonHolder>
     </Holder>
@@ -54,15 +50,17 @@ const Container = styled.div`
 
 `
 
+
 const NavHomeButton = styled.button`
     all: unset;
     padding: 1.5vw;
-    font-size: 4.5vw;
-    // background-color: gainsboro;
+    font-size: 6.5vw;
+    // background-color: #7C8C94;
     border: none;
     cursor: pointer;
     transition: 0.3s ease all;
     border-radius: 0.5vw;
+    font-weight: bold;
 
     &:hover{
         background-color: #C0C0C0;
@@ -71,7 +69,7 @@ const NavHomeButton = styled.button`
 const Holder = styled.div`
     display:flex;
     width: 100%;
-    background-color: grey;
+    background-color: #7C8C94;
     
     justify-content: space-between;
     padding: 1vw;
@@ -91,7 +89,7 @@ gap: 8vw;
 
 const NavElement = styled.button`
 padding: 1.5vw;
-font-size: 2.4vw;
+font-size: 3.0vw;
 background-color: gainsboro;
 border: none;
 cursor: pointer;

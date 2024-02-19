@@ -30,7 +30,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
 
-
+//  FOR NOW THE SIGN UP PAGE IS A DUPLICATE OF THE LOGIN PAGE ////////////////////////////////
 
 
 // need to pull the input from the text and password Inputs upon the press of the 
@@ -102,7 +102,7 @@ export default function Login() {
        <LoginContainer>
        
           <LoginBox>
-            <h1>Enter your username and password below</h1>
+            <h1>Create a username and password</h1>
             <form>
                 <InputGroup>
                     <Input type= "text" placeholder = "Username" ref = {usernameRef}/>
@@ -113,13 +113,11 @@ export default function Login() {
                 <InputGroup>
                     
 
-                    <LoginButton onClick={(event) => handleLogin(event)}> Log In </LoginButton>
+                    <LoginButton onClick={(event) => handleLogin(event)}> Sign Up </LoginButton>
                    
                 </InputGroup>
-                <InputGroup> <p>Don't have an account? Sign Up <StyledLink href="/signup">Here</StyledLink> </p></InputGroup>
             </form>
           </LoginBox>
-         
        </LoginContainer>
        </WholeContainer>
         </>
@@ -129,10 +127,7 @@ export default function Login() {
 
 // CSS FOR THE LOGIN PAGE
 // should replace pixel paddings with relative sizing measurements     
-const StyledLink = styled.a`
-  color: inherit;
-  text-decoration: none;
-`;
+
 
 
 
