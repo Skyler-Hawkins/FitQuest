@@ -2,29 +2,17 @@ import Head from "next/head";
 import styled from 'styled-components';
 import React from 'react';
 import {useState, useEffect, useRef} from 'react';
-// import {auth} from '@library/firebaseConfig';
+import {auth} from '@/library/firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 
 
 // AUTHENTICATION FROM SLIDES
-// const email = "user@example.com";
+// const email = "user@example.com"; // pull from text-boxes
 // const password = "userpassword";
 
-// createUserWithEmailAndPassword(auth, email, password)
-//     .then((userCredential) => {
-//         // Signed in
-//         const user = userCredential.user;
-//         // ...
-//         console.log('User ${user.email} signed up successfully');
-//     })
-//     .catch((error) => {
-//         const errorCode = error.code;
-//         const errorMessage = error.message;
-//         // ..
-//         console.log('Error: ${errorCode} ${errorMessage}');
-          
-//     })
+
 
 
 
@@ -56,19 +44,35 @@ export default function Login() {
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
 
+    
     const handleLogin = (event) => {
 
         // need to figure out how to conditionally prevent this. if password is
         // incorrect, then prevent default. if correct, then allow refresh
+        console.log("Button clicked")
         event.preventDefault();
 
 
-        const username = usernameRef.current.value;
+        const email = usernameRef.current.value;
         const password = passwordRef.current.value;
 
-        console.log('Username:', username);
+        console.log('email:', email);
         console.log('Password:', password);
 
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            // ...
+            window.location.href = "/";
+            console.log(`User ${user.email} logged in successfully`);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+            console.log(`Error: ${errorCode} ${errorMessage}`);
+        })
         // Perform login logic here
 
         
@@ -103,7 +107,7 @@ export default function Login() {
        
           <LoginBox>
             <h1>Enter your username and password below</h1>
-            <form>
+            {/* <form> */}
                 <InputGroup>
                     <Input type= "text" placeholder = "Username" ref = {usernameRef}/>
                 </InputGroup>
@@ -117,7 +121,8 @@ export default function Login() {
                    
                 </InputGroup>
                 <InputGroup> <p>Don't have an account? Sign Up <StyledLink href="/signup">Here</StyledLink> </p></InputGroup>
-            </form>
+           
+            {/* </form> */}
           </LoginBox>
          
        </LoginContainer>
@@ -138,21 +143,25 @@ const StyledLink = styled.a`
 
 const WholeContainer = styled.div`
     height: 100%;
+
 `
 
 
 
 const TitleContainer = styled.div`
     font-size: 1.6em;
-    background-color: #f0f2f5;
-`
+    color: white;
+    background-color: #37de3d; //light-ish green
+    `
 
 const LoginContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     height: 90vh;
-    background-color: #f0f2f5;
+    // background-color: #f0f2f5; //default grey
+    background-color: #37de3d; //light-ish green
+
 `
 
 const LoginBox = styled.div`

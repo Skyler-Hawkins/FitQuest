@@ -2,7 +2,7 @@ import Head from "next/head";
 import styled from 'styled-components';
 import React from 'react';
 import {useState, useEffect, useRef} from 'react';
-// import {auth} from '@library/firebaseConfig';
+import {auth} from '@/library/firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
@@ -63,11 +63,28 @@ export default function Login() {
         event.preventDefault();
 
 
-        const username = usernameRef.current.value;
+        const email = usernameRef.current.value;
         const password = passwordRef.current.value;
 
-        console.log('Username:', username);
+        console.log('Username:', email);
         console.log('Password:', password);
+        
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            // ...
+            console.log(`User ${user.email} signed up successfully`);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+            console.log(`Error: ${errorCode} ${errorMessage}`);
+              
+        })
+    
 
         // Perform login logic here
 
@@ -102,19 +119,19 @@ export default function Login() {
        <LoginContainer>
        
           <LoginBox>
-            <h1>Create a username and password</h1>
+            <h1>Input an email and password</h1>
             <form>
                 <InputGroup>
-                    <Input type= "text" placeholder = "Username" ref = {usernameRef}/>
+                    <Input type= "text" placeholder = "Email" ref = {usernameRef}/>
                 </InputGroup>
                 <InputGroup>
                     <Input type = "password" placeholder = "Password" ref = {passwordRef}/>
                 </InputGroup>
                 <InputGroup>
-                    
-
                     <LoginButton onClick={(event) => handleLogin(event)}> Sign Up </LoginButton>
-                   
+                </InputGroup>
+                <InputGroup>
+                    <p>Template Error Box</p>
                 </InputGroup>
             </form>
           </LoginBox>
@@ -139,15 +156,22 @@ const WholeContainer = styled.div`
 
 const TitleContainer = styled.div`
     font-size: 1.6em;
-    background-color: #f0f2f5;
+    color: white;
+    // background-color: #f0f2f5;
+    background-color: #37de3d; //light-ish green
+    
+
 `
 
 const LoginContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    
     height: 90vh;
-    background-color: #f0f2f5;
+    // background-color: #f0f2f5; //light grey
+    background-color: #37de3d; //light-ish green
+
 `
 
 const LoginBox = styled.div`

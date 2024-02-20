@@ -19,6 +19,9 @@ const NavBar = () => {
     </LogoBox>
     <NavButtonHolder>
         <NavElement>
+            <StyledLink href="/login">Login</StyledLink>
+        </NavElement>
+        <NavElement>
             <StyledLink href="/My_Info">My Info</StyledLink>
         </NavElement>
         <NavElement>
@@ -41,6 +44,7 @@ const Container = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    color: white;
     // padding-top: 1vw;
     // padding-left: 1vw;
     // padding-right: 1vw;
@@ -54,7 +58,7 @@ const Container = styled.div`
 const NavHomeButton = styled.button`
     all: unset;
     padding: 1.5vw;
-    font-size: 6.5vw;
+    font-size: 3.5vw;
     // background-color: #7C8C94;
     border: none;
     cursor: pointer;
@@ -89,7 +93,7 @@ gap: 8vw;
 
 const NavElement = styled.button`
 padding: 1.5vw;
-font-size: 3.0vw;
+font-size: 2.5vw;
 background-color: gainsboro;
 border: none;
 cursor: pointer;

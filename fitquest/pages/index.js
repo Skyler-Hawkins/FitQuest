@@ -1,5 +1,8 @@
+require('dotenv').config();
+// console.log(process.env.API_NINJA);
+// console.log("***********************************")
+
 import Head from "next/head";
-import Image from "next/image";      
 import styled from 'styled-components';
 import {useState, useEffect, useRef} from 'react';
 
@@ -7,48 +10,38 @@ import NavBar from "@/components/NavBar";
 
 
 
-// importing for a link to another page
-import Link from "next/link";
-
-
-
-// Set all styled components 
-const Container = styled.div`
-  color: green;
-`
-
-
-
-
-const ParentContainer = styled.div`
-*{
-  // padding: 0;
-  flex-direction: row;
-  font: Roboto;
-}
-`
-
-
-
-
 export default function Home() {
-
-  ///////////////////////////////////////////// Note: api here does not yet work, 
-  //  having issues with pulling key correctly. Requires no api key, but CORS will not allow
-  // me to import, willl look into bypassing using a proxy server. 
-  const api_url ="https://zenquotes.io/api/today";
-  const [quote, setQuote] = useState("");
-
+  const [quote, setQuote] = useState("Motivational Quote Here");
   useEffect(() => {
-    getApi(api_url);
+    fetchQuotes();
   }, []);
-
-  function getApi(url) {
-    fetch("https://zenquotes.io/api/today", {mode: 'no_cors'})
-      .then(response => response.json())
-      .then(data => setQuote(data))
-      .catch(error => console.log(error))
+// Pulls a quote from the api (set as the 0th return now, seems to change on every refresh, gotta watch limit)
+// ASK WHY environment variable is not working, api key in use directly does work but process env not
+var category = 'fitness';
+const fetchQuotes = () => {
+fetch('https://api.api-ninjas.com/v1/quotes?category=' + category, {
+  method: 'GET',
+  headers: {
+    'X-Api-Key': process.env.API_NINJA,
+    'Content-Type': 'application/json'
   }
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(result => {
+    console.log(result);
+    setQuote(result[0].quote + " -"+ result[0].author); // Update the state with the result
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+
   return (
     <>
       <Head>
@@ -65,26 +58,24 @@ export default function Home() {
 
       <TitleContainer>Welcome To FitQuest!</TitleContainer>
       <BodyContainer>
-        {/* <Description>{quote}</Description> */}
-        {/* <DescriptionAndImageContainer> */}
-          <Description>
-              <h1>About Us</h1> <br/>
-              FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
-              It provides a platform for users to track their workouts, set goals, and monitor their progress.
-              With FitQuest, users can create personalized workout plans, access a library of exercises,
-              and join challenges to stay motivated and engaged. Whether you're a beginner or an experienced fitness enthusiast, FitQuest is here to support you
-              on your fitness journey and help you reach your full potential.
-          </Description>      
-          {/* <ImgContainer>
-          <img src = "FitQuestLogo.jpg"/>
-          </ImgContainer> 
-        </DescriptionAndImageContainer> */}
+        <Description><h1> Quote Of The Day</h1>
+        {quote}
+        </Description>
+        <br/>
+        <Description>
+            <h1>About Us</h1> <br/>
+            FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
+            It provides a platform for users to track their workouts, set goals, and monitor their progress.
+            With FitQuest, users can create personalized workout plans, access a library of exercises,
+            and join challenges to stay motivated and engaged. Whether you're a beginner or an experienced fitness enthusiast, FitQuest is here to support you
+            on your fitness journey and help you reach your full potential.
+        </Description>      
         <TitleContainer>Fitness</TitleContainer>
         <DescriptionAndImageContainer>
             <Description>
             <h1>The Fitness Experience</h1> <br/>
             The FitQuest app offers a fitness challenge feature where users can track their progress, set goals, and engage in competitions. It includes personalized workout plans, 
-            a library of exercises, and the option to join challenges with others, catering to both beginners and seasoned fitness enthusiasts aiming to reach their fitness potential.
+            a library of exercises, and the option to join challenges with others, catering to both beginners and seasoned fitness enthusiasts aiming to reach their fitness potential.  
             </Description>
             <StyledLink href="/Fitness">
               <ImgContainer>
@@ -104,13 +95,25 @@ export default function Home() {
   );
 }
 
-// Organizing into various containers, somewhat messy as of 2/13
+// Organizing into various containers, somewhat messy as of 2/13 
 // Colors used: 
 // original background: #70d158; //light-ish green
 // new background: #BAEDC1 // Magand (light green)
 
 // old description background: #2aad09
 // new description background: #082834
+
+// Set all styled components 
+const Container = styled.div`
+  color: green;
+`
+
+
+
+const ParentContainer = styled.div`
+  font-family: 'Roboto', sans-serif;
+  color: white;
+`
 
 const StyledLink = styled.a`
   color: inherit;
@@ -123,21 +126,17 @@ const TitleContainer = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #BAEDC1; //light-ish green  
+  background-color: #37de3d; //light-ish green
 `;
-
-
-
 
 const BodyContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  background-color: #BAEDC1; //light-ish green
+  height: 100%;
+  background-color: #37de3d; //light-ish green
   position: relative;
-
 `;
 
 const DescriptionAndImageContainer = styled.div`
@@ -146,11 +145,7 @@ const DescriptionAndImageContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-
   `;
-
-
 
 const ImgContainer = styled.div`
   display: flex;
@@ -169,11 +164,15 @@ const ImgContainer = styled.div`
 
 
 const Description = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 20w;
   width: 50%;
-   background-color: #54D074;
-   
-   box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+  background-color: #067d0a;
+  color: white;   
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
   border-radius: 3%;
   margin-right: 2vw;
   margin-left: .1vw;
@@ -182,9 +181,5 @@ const Description = styled.div`
   font-family: 'Roboto', sans-serif;
 `;
 
-
-
-
 // Need to make good functional homepage
-
 // start with a textbox description of the app, need some nice styling

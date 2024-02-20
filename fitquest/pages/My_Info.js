@@ -13,11 +13,11 @@ export default function My_Info() {
         <TitleContainer>Your Information</TitleContainer>
         <BodyContainer>
             <Description>
-                <h1> My Info</h1>
-                <h2> Name: </h2>
-                <h2> Age: </h2>
-                <h2> Weight: </h2>
-                <h2> Height: </h2>
+                <h1>My Info</h1>
+                <p> Name: </p>
+                <p> Age: </p>
+                <p> Weight: </p>
+                <p> Height: </p>
             </Description>
             <Description>
                 <h1>Update your information here!</h1>
@@ -29,8 +29,6 @@ export default function My_Info() {
                     <option value="height">Height</option>
                 </select>
                 <input type="text" id="newInfo" placeholder="Enter new information" />                
-            </Description>
-            <Description>
             </Description>
         </BodyContainer>
     </>
@@ -45,7 +43,7 @@ const TitleContainer = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #BAEDC1; //light-ish green  
+  background-color: #37de3d; //light-ish green
 `;
 
 
@@ -57,8 +55,11 @@ const BodyContainer = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: #BAEDC1; //light-ish green
+  background-color: #37de3d; //light-ish green
+  color: white;
   position: relative;
+  padding-bottom: 5vw;
+  
 
 `;
 
@@ -91,15 +92,21 @@ const ImgContainer = styled.div`
 
 
 const Description = styled.div`
-  height: 20w;
-  width: 50%;
-   background-color: #54D074;
-   
-   box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 20vw;
+  width: 80vw;
+  background-color: #067d0a;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
   border-radius: 3%;
   margin-right: 2vw;
+  margin-bottom: 5vw;
   margin-left: .1vw;
   padding: 2vw;
+  padding-bottom: 5vw;
   font-size: 1.2em;
   font-family: 'Roboto', sans-serif;
 `;

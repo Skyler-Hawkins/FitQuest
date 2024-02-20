@@ -9,13 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "dotenv": "^16.4.4",
     "firebase": "^10.8.0",
+    "fs": "^0.0.1-security",
     "link": "^2.1.0",
+    "net": "^1.0.2",
     "next": "14.1.0",
     "react": "^18",
     "react-bootstrap": "^2.10.0",
     "react-dom": "^18",
-    "styled-components": "^6.1.8"
+    "request": "^2.88.2",
+    "styled-components": "^6.1.8",
+    "tls": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "20.11.16",

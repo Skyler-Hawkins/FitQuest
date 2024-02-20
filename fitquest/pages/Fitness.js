@@ -48,7 +48,8 @@ export default function Fitness() {
     
     width: 80%;
     text-align: center;
-    background-color: #54D074;
+    background-color: #067d0a;
+    color: white;
 
     box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
     border-radius: 3%;
@@ -59,28 +60,28 @@ export default function Fitness() {
 
     `
 
-
-    const TitleContainer = styled.div`
+    const StyledLink = styled.a`
+    color: inherit;
+    text-decoration: none;
+  `;
+  
+  const TitleContainer = styled.div`
     font-size: 5.0vw;
     padding: 3vw;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #BAEDC1; //light-ish green  
+    background-color: #37de3d; //light-ish green
   `;
-  
-  
-  
   
   const BodyContainer = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    background-color: #BAEDC1; //light-ish green
+    height: 100vw;
+    background-color: #37de3d; //light-ish green
     position: relative;
-  
   `;
   
   const DescriptionAndImageContainer = styled.div`
@@ -89,11 +90,7 @@ export default function Fitness() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  
-  
     `;
-  
-  
   
   const ImgContainer = styled.div`
     display: flex;
@@ -114,9 +111,10 @@ export default function Fitness() {
   const Description = styled.div`
     height: 20w;
     width: 50%;
-    background-color: #54D074;
-     
-     box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+    background-color: #067d0a;
+    color: white;   
+  
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
     border-radius: 3%;
     margin-right: 2vw;
     margin-left: .1vw;
