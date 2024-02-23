@@ -19,16 +19,24 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
-let app;
+let firebase_app;
 
 if (!getApps().length) {
-  app = initializeApp(firebaseConfig);
+  firebase_app = initializeApp(firebaseConfig);
 } else {
-  app = getApp();
+  firebase_app = getApp();
 }
 
-export const auth = getAuth(app);
-export const database = getFirestore(app);
+export const auth = getAuth(firebase_app);
+export const database = getFirestore(firebase_app);
 // export const googleProvider = new GoogleAuthProvider(app).addScope('email');
-
-export default app;
+if (auth && auth.currentUser) {
+  console.log('auth is not null and a user is signed in');
+  console.log(auth.currentUser);
+} else if (auth) {
+  console.log('auth is not null but no user is signed in');
+} else {
+  console.log('auth is null');
+}
+console.log("firebase set up without and errors (presumed successful)")
+export default firebase_app;

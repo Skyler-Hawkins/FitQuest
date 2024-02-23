@@ -6,7 +6,9 @@ import NavBar from "@/components/NavBar";
 import InputBox from "@/components/InputBox";
 import Dropdown from "@/components/Dropdown";
 import backdrop from "@/components/backdrop";
-
+//for auth
+import firebase_app from "@/library/firebaseConfig";
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
 
 const ParentContainer = styled.div`
 *{
@@ -18,7 +20,27 @@ const ParentContainer = styled.div`
 `
 
 
+
+
 export default function My_Info() {
+  //this will be in every page for now. 
+  const auth = getAuth(firebase_app);
+  console.log("auth: ", auth);
+    onAuthStateChanged(auth, (user) => {
+      if(user)
+      {
+        console.log('User is signed in');
+        console.log(user.email);
+      }
+      else
+      {
+        // direct user to sign-in page
+        window.location.href = "/login";
+        console.log('No user is signed in');
+      }
+    });
+
+
     return ( <>
     {/* Need to Pull data from db, have no data nor have the db set up yet, so for now blank */}  
         {/* <backdrop>
@@ -26,6 +48,7 @@ export default function My_Info() {
         </backdrop> */}
         <ParentContainer>
         <NavBar/>
+        the email of the current user is: 
         <TitleContainer>My Info</TitleContainer>
         <BodyContainer>
             <Description>

@@ -3,9 +3,10 @@ import Image from "next/image";
 import { Inter } from "next/font/google";               
 import styled from 'styled-components';
 import Link from 'next/link';
-
-
 import NavBar from "@/components/NavBar";
+//for auth
+import firebase_app from "@/library/firebaseConfig";
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
 
 
 const ParentContainer = styled.div`
@@ -19,6 +20,22 @@ const ParentContainer = styled.div`
 
 
 export default function Fitness() {
+  //this will be in every page for now. 
+  const auth = getAuth(firebase_app);
+  console.log("auth: ", auth);
+    onAuthStateChanged(auth, (user) => {
+      if(user)
+      {
+        console.log('User is signed in');
+        console.log(user.email);
+      }
+      else
+      {
+        // direct user to sign-in page
+        window.location.href = "/login";
+        console.log('No user is signed in');
+      }
+    });
     return (
         <>
           <ParentContainer>

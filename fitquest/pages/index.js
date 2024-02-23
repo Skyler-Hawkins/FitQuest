@@ -3,7 +3,7 @@ import Head from "next/head";
 import styled from 'styled-components';
 import {useState, useEffect, useRef} from 'react';
 // import Day_Quote from "@/components/Day_Quote";
-
+import firebase_app from "@/library/firebaseConfig";
 import NavBar from "@/components/NavBar";
 
 
@@ -60,17 +60,19 @@ const fetchQuotes = async () => {
         </Description>  
         <Description><h1> Quote Of The Day</h1> <br/> {quote} </Description>    
         <TitleContainer>Fitness</TitleContainer>
+        <br/>
         <DescriptionAndImageContainer>
-            <Description>
-            {/* <TitleContainer>The Fitness Experience</TitleContainer>  */}
-            The FitQuest app offers a fitness challenge feature where users can track their progress, set goals, and engage in competitions. It includes personalized workout plans, 
-            a library of exercises, and the option to join challenges with others, catering to both beginners and seasoned fitness enthusiasts aiming to reach their fitness potential.
-            </Description>
-            <StyledLink href="/Fitness">
+          <StyledLink href="/Fitness">
               <ImgContainer>
                 <img src = "FitQuestLogo.jpg"/>
               </ImgContainer> 
-            </StyledLink>
+          </StyledLink>
+          <br/>
+          <Description>
+            {/* <TitleContainer>The Fitness Experience</TitleContainer>  */}
+            The FitQuest app offers a fitness challenge feature where users can track their progress, set goals, and engage in competitions. It includes personalized workout plans, 
+            a library of exercises, and the option to join challenges with others, catering to both beginners and seasoned fitness enthusiasts aiming to reach their fitness potential.
+          </Description>
         </DescriptionAndImageContainer>
       </BodyContainer>
 
@@ -108,9 +110,9 @@ const ParentContainer = styled.div`
 `
 
 const StyledLink = styled.a`
-  color: inherit;
-  text-decoration: none;
-  height: 20vw;
+  // color: inherit;
+  // text-decoration: none;
+  height: 40vw;
 `;
 
 const TitleContainer = styled.div`
@@ -120,14 +122,6 @@ const TitleContainer = styled.div`
   justify-content: center;
   text-align: center;
   font-weight: bold;
-
-  
-  
-
-
-  // background-color: #37de3d; //light-ish green
-  background-color: #f2f2e6;  //very light grey
-
 `;
 
 const BodyContainer = styled.div`
@@ -147,61 +141,67 @@ const BodyContainer = styled.div`
 
 
 const DescriptionAndImageContainer = styled.div`
-  margin-top: 6vw;
-  margin-bottom: 12vw;
+  // margin-top: 6vw;
+  // margin-bottom: 12vw;
+  height: 100vw;
+  // width: 50%;
   display: flex;
-  flex-direction: row;
-  // justify-content: space-between;
-  // align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  justfiy-content: center;
+  overflow: hidden;  
 
-  
   `;
 
+
+
+  const ImgContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    border-radius: 3%;
+    transform: scale(1.1);
+    margin-top: 2vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+    width: 20vw;
+    height: 20vw;     
+    background-color: #042131;
+    padding: 3vw;
+    // border-top-left-radius: 10px;
+    // border-top-right-radius: 10px;
+  `;
 
   const BannerImgContainer = styled.div`
   display: flex;
   justify-content: center;
   align_item
   border-radius: 3%;
+  border: 1px solid black;
   transform: scale(1.2);
   // box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
   // width: 20vw;
   // height: 20vw;     
-  margin-bottom: 0vw;
-  margin-top: 0vw;                       
-  margin-right: 10vw;
-  background-color: #042131;
+  margin-bottom: 5vw;
+  margin-top: 5vw;                       
+  // margin-right: 10vw;
+  // background-color: #042131;
   padding: 3vw;
 `;
 
-
-const ImgContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  border-radius: 3%;
-  transform: scale(1.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
-  width: 20vw;
-  height: 20vw;     
-  margin-bottom: 0vw;
-  margin-top: 0vw;                       
-  margin-right: 10vw;
-  background-color: #042131;
-  padding: 3vw;
-`;
 
 
 const Description = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 80vh;
+  height: 120vh;
   // background-color: #067d0a;
   color: Navy;   
   boxwidth-shadow: 0 0 10px rgba(0, 0, 0, .3); 
   border-radius: 3%;
   margin-right: 2vw;
   margin-left: .1vw;
+  width: 50%;
   padding: 3vw;
   font-size: 3.0vw;
   font-family: 'Roboto', sans-serif;

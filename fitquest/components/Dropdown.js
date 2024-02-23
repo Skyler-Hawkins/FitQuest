@@ -11,8 +11,11 @@ const Dropbtn = styled.button`
 `;
 
 // Style for dropdown content
-const DropdownContent = styled.div`
-display: ${props => (props.showDropdown ? 'block' : 'none')};    position: absolute;
+const DropdownContent = styled.div.withConfig({
+    shouldForwardProp: (prop) => prop !== 'show',
+  })`
+    display: ${props => (props.showDropdown ? 'block' : 'none')};
+    position: absolute;
     background-color: #ffffff;
     min-width: 85px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -40,6 +43,7 @@ const HoverDropbtn = styled(Dropbtn)`
 
 `;
 
+
 export default function Dropdown() {
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -52,7 +56,7 @@ export default function Dropdown() {
         <span className="dropdown">
             <HoverDropbtn onClick={toggleDropdown}>Dropdown</HoverDropbtn>
             <HoverDropdown>
-                <DropdownContent >
+                <DropdownContent show={showDropdown}>
                     <DropdownItem>Name</DropdownItem>
                     <DropdownItem>Age</DropdownItem>
                     <DropdownItem>Weight</DropdownItem>
