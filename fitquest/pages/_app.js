@@ -1,5 +1,6 @@
 import {createGlobalStyle} from 'styled-components'
-
+import React, {useState} from 'react';
+import {AuthContext} from "./AuthContext";
 
 export const GlobalStyle = createGlobalStyle`
 *{

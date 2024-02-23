@@ -1,10 +1,8 @@
 require('dotenv').config();
-// console.log(process.env.API_NINJA);
-// console.log("***********************************")
-
 import Head from "next/head";
 import styled from 'styled-components';
 import {useState, useEffect, useRef} from 'react';
+// import Day_Quote from "@/components/Day_Quote";
 
 import NavBar from "@/components/NavBar";
 
@@ -17,28 +15,18 @@ export default function Home() {
   }, []);
 // Pulls a quote from the api (set as the 0th return now, seems to change on every refresh, gotta watch limit)
 // ASK WHY environment variable is not working, api key in use directly does work but process env not
+
 var category = 'fitness';
-const fetchQuotes = () => {
-fetch('https://api.api-ninjas.com/v1/quotes?category=' + category, {
-  method: 'GET',
-  headers: {
-    'X-Api-Key': process.env.API_NINJA,
-    'Content-Type': 'application/json'
+const fetchQuotes = async () => {
+  try {
+    console.log("Fetching the quote")
+    const response = await fetch('/api/quote');
+    const data = await response.json();
+    setQuote(data.quote);
+    console.log("Fetched!");
+  } catch (error) {
+    console.error('Error fetching quotes:', error);
   }
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(result => {
-    console.log(result);
-    setQuote(result[0].quote + " -"+ result[0].author); // Update the state with the result
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
 }
 
 
@@ -52,16 +40,16 @@ fetch('https://api.api-ninjas.com/v1/quotes?category=' + category, {
       </Head>
       {/* This h1 is a LINK to the test JS file  */}
       {/* {/* <h1><Link href="/test">Click to go to Dashboard</Link> </h1> */}
+      {/* <Day_Quote/> */}
 
       <ParentContainer>
         <NavBar/>
 
       <TitleContainer>Welcome To FitQuest!</TitleContainer>
       <BodyContainer>
-        <Description><h1> Quote Of The Day</h1>
-        {quote}
-        </Description>
-        <br/>
+        <BannerImgContainer> 
+          <img src= "Fitness_Stock_Image_2.jpg"/>
+        </BannerImgContainer>
         <Description>
             <h1>About Us</h1> <br/>
             FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
@@ -69,13 +57,14 @@ fetch('https://api.api-ninjas.com/v1/quotes?category=' + category, {
             With FitQuest, users can create personalized workout plans, access a library of exercises,
             and join challenges to stay motivated and engaged. Whether you're a beginner or an experienced fitness enthusiast, FitQuest is here to support you
             on your fitness journey and help you reach your full potential.
-        </Description>      
+        </Description>  
+        <Description><h1> Quote Of The Day</h1> <br/> {quote} </Description>    
         <TitleContainer>Fitness</TitleContainer>
         <DescriptionAndImageContainer>
             <Description>
-            <h1>The Fitness Experience</h1> <br/>
+            {/* <TitleContainer>The Fitness Experience</TitleContainer>  */}
             The FitQuest app offers a fitness challenge feature where users can track their progress, set goals, and engage in competitions. It includes personalized workout plans, 
-            a library of exercises, and the option to join challenges with others, catering to both beginners and seasoned fitness enthusiasts aiming to reach their fitness potential.  
+            a library of exercises, and the option to join challenges with others, catering to both beginners and seasoned fitness enthusiasts aiming to reach their fitness potential.
             </Description>
             <StyledLink href="/Fitness">
               <ImgContainer>
@@ -112,12 +101,16 @@ const Container = styled.div`
 
 const ParentContainer = styled.div`
   font-family: 'Roboto', sans-serif;
-  color: white;
+  // color: white;
+  background-color: #f2f2e6;  //very light grey
+  height: 100%;
+  color: Navy;
 `
 
 const StyledLink = styled.a`
   color: inherit;
   text-decoration: none;
+  height: 20vw;
 `;
 
 const TitleContainer = styled.div`
@@ -126,7 +119,15 @@ const TitleContainer = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #37de3d; //light-ish green
+  font-weight: bold;
+
+  
+  
+
+
+  // background-color: #37de3d; //light-ish green
+  background-color: #f2f2e6;  //very light grey
+
 `;
 
 const BodyContainer = styled.div`
@@ -135,17 +136,44 @@ const BodyContainer = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  background-color: #37de3d; //light-ish green
+  // background-color: #37de3d; //light-ish green
+  background-color: #f2f2e6;  //very light grey
+
   position: relative;
+  
+  
 `;
+
+
 
 const DescriptionAndImageContainer = styled.div`
   margin-top: 6vw;
   margin-bottom: 12vw;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
+  // justify-content: space-between;
+  // align-items: center;
+
+  
   `;
+
+
+  const BannerImgContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align_item
+  border-radius: 3%;
+  transform: scale(1.2);
+  // box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+  // width: 20vw;
+  // height: 20vw;     
+  margin-bottom: 0vw;
+  margin-top: 0vw;                       
+  margin-right: 10vw;
+  background-color: #042131;
+  padding: 3vw;
+`;
+
 
 const ImgContainer = styled.div`
   display: flex;
@@ -167,19 +195,14 @@ const Description = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 20w;
-  width: 50%;
-  background-color: #067d0a;
-  color: white;   
-
-  box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+  height: 80vh;
+  // background-color: #067d0a;
+  color: Navy;   
+  boxwidth-shadow: 0 0 10px rgba(0, 0, 0, .3); 
   border-radius: 3%;
   margin-right: 2vw;
   margin-left: .1vw;
-  padding: 2vw;
-  font-size: 1.2em;
+  padding: 3vw;
+  font-size: 3.0vw;
   font-family: 'Roboto', sans-serif;
 `;
-
-// Need to make good functional homepage
-// start with a textbox description of the app, need some nice styling

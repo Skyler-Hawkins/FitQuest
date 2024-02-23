@@ -16,6 +16,8 @@ const ParentContainer = styled.div`
 }
 `
 
+
+
 export default function Fitness() {
     return (
         <>
@@ -30,7 +32,8 @@ export default function Fitness() {
               <Description>
                     Throw your hat into the ring!
                 <InputGroup>
-                  <Input type = "text" placeHolder = "# Pushups per minute"/>
+                  <Input type = "text" placeholder = "# Pushups per minute"/>
+                
                 </InputGroup>
               </Description>
               <Description>

@@ -5,6 +5,7 @@ import {useState, useEffect, useRef} from 'react';
 import {auth} from '@/library/firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useContext} from 'react';
 
 
 
@@ -17,7 +18,26 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 
 
+/*
+const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    // Check if user is logged in
+    const userLoggedIn = checkUserLoggedIn(); // Replace with your own logic to check if user is logged in
+
+    if (!userLoggedIn) {
+      // Redirect to login page
+      router.push("/login");
+    } else {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  if (!isLoggedIn) {
+    return null; // Render nothing while checking if user is logged in
+  }
+*/
 
 
 
@@ -43,14 +63,16 @@ export default function Login() {
 
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
-
     
+    // const auth = useContext(AuthContext)
+    
+    const {isLoggedIn, setIsLoggedIn} = auth;
     const handleLogin = (event) => {
 
         // need to figure out how to conditionally prevent this. if password is
         // incorrect, then prevent default. if correct, then allow refresh
         console.log("Button clicked")
-        event.preventDefault();
+
 
 
         const email = usernameRef.current.value;
@@ -64,6 +86,7 @@ export default function Login() {
             // Signed in
             const user = userCredential.user;
             // ...
+            // setIsLoggedIn(true);
             window.location.href = "/";
             console.log(`User ${user.email} logged in successfully`);
         })
@@ -74,8 +97,7 @@ export default function Login() {
             console.log(`Error: ${errorCode} ${errorMessage}`);
         })
         // Perform login logic here
-
-        
+        event.preventDefault();
     };
 
     
@@ -120,7 +142,7 @@ export default function Login() {
                     <LoginButton onClick={(event) => handleLogin(event)}> Log In </LoginButton>
                    
                 </InputGroup>
-                <InputGroup> <p>Don't have an account? Sign Up <StyledLink href="/signup">Here</StyledLink> </p></InputGroup>
+                <InputGroup> <p>Don't have an account? <StyledLink href="/signup"> Sign Up Here</StyledLink> </p></InputGroup>
            
             {/* </form> */}
           </LoginBox>
@@ -135,9 +157,12 @@ export default function Login() {
 // CSS FOR THE LOGIN PAGE
 // should replace pixel paddings with relative sizing measurements     
 const StyledLink = styled.a`
-  color: inherit;
-  text-decoration: none;
-`;
+//  color: inherit;
+    text-decoration: none;
+    color: blue;
+
+  `;
+
 
 
 
@@ -150,8 +175,10 @@ const WholeContainer = styled.div`
 
 const TitleContainer = styled.div`
     font-size: 1.6em;
-    color: white;
-    background-color: #37de3d; //light-ish green
+    // color: white;
+    // background-color: #37de3d; //light-ish green
+    background-color: #f2f2e6;  //very light grey
+
     `
 
 const LoginContainer = styled.div`
@@ -160,7 +187,9 @@ const LoginContainer = styled.div`
     align-items: center;
     height: 90vh;
     // background-color: #f0f2f5; //default grey
-    background-color: #37de3d; //light-ish green
+    // background-color: #37de3d; //light-ish green
+    background-color: #f2f2e6;  //very light grey
+
 
 `
 
@@ -170,7 +199,7 @@ const LoginBox = styled.div`
     align-items: center;
     background-color: white;
     border-radius: 3%;
- 
+
     box-shadow: 0 0 10px rgba(0, 0, 0, .4);                             
 
 `
