@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {useState, useEffect, useRef} from 'react';
 // import Day_Quote from "@/components/Day_Quote";
 import firebase_app from "@/library/firebaseConfig";
+import database from "@/library/firebaseConfig";
 import NavBar from "@/components/NavBar";
 
 
@@ -203,6 +204,6 @@ const Description = styled.div`
   margin-left: .1vw;
   width: 50%;
   padding: 3vw;
-  font-size: 3.0vw;
+  font-size: 2.4vw;
   font-family: 'Roboto', sans-serif;
 `;

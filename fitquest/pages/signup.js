@@ -4,7 +4,9 @@ import React from 'react';
 import {useState, useEffect, useRef} from 'react';
 import {auth} from '@/library/firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
+import firebase_app from "@/library/firebaseConfig";
+import {database} from "@/library/firebaseConfig";
+import {doc, setDoc, collection, addDoc} from 'firebase/firestore';
 
 
 // AUTHENTICATION FROM SLIDES
@@ -55,6 +57,8 @@ export default function Login() {
 
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
+    const emailRef = useRef(null);
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const handleLogin = (event) => {
 
@@ -62,26 +66,51 @@ export default function Login() {
         // incorrect, then prevent default. if correct, then allow refresh
         event.preventDefault();
 
-
-        const email = usernameRef.current.value;
+        const username = usernameRef.current.value;
+        const email = emailRef.current.value;
         const password = passwordRef.current.value;
-
-        console.log('Username:', email);
+        console.log('username:', username)
+        console.log('email:', email);
         console.log('Password:', password);
         
-
+        // NOTE, i am aware of the issue that if there is a DB issue where the DB doesnt set properly, this user will be assigned
+        // without a document in the DB. If time permits, I will come back to this.
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
             // ...
             console.log(`User ${user.email} signed up successfully`);
+
+            //on sign up, need to make a document with the id being the user's userID (will utilize email for this, since will be unique)
+            const newDocData = { name: username, email: email };
+            
+            console.log("database: ", database);
+            const docRef = doc(database, "users", email);
+            setDoc(docRef, newDocData)
+            .then(() => {
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+            setTimeout(() => {}, 1000);
+
+
+            window.location.href = "/";
+
+
+
         })
         .catch((error) => {
+            setErrorMessage(null);
             const errorCode = error.code;
             const errorMessage = error.message;
             // ..
             console.log(`Error: ${errorCode} ${errorMessage}`);
+            setTimeout(() => {}, 1000);
+            setErrorMessage("invalid email/password combination");
+            
               
         })
     
@@ -119,10 +148,13 @@ export default function Login() {
        <LoginContainer>
        
           <LoginBox>
-            <h1>Input an email and password</h1>
-            <form>
+            <h1>Input a Desired Username, Email, and Password</h1>
+            
                 <InputGroup>
-                    <Input type= "text" placeholder = "Email" ref = {usernameRef}/>
+                    <Input type= "text" placeholder = "Name" ref = {usernameRef}/>
+                </InputGroup>
+                <InputGroup>
+                    <Input type= "text" placeholder = "Email" ref = {emailRef}/>
                 </InputGroup>
                 <InputGroup>
                     <Input type = "password" placeholder = "Password" ref = {passwordRef}/>
@@ -131,9 +163,9 @@ export default function Login() {
                     <LoginButton onClick={(event) => handleLogin(event)}> Sign Up </LoginButton>
                 </InputGroup>
                 <InputGroup>
-                    <p>Template Error Box</p>
+                    <p>{errorMessage}</p>
                 </InputGroup>
-            </form>
+          
           </LoginBox>
        </LoginContainer>
        </WholeContainer>
@@ -156,21 +188,22 @@ const WholeContainer = styled.div`
 
 const TitleContainer = styled.div`
     font-size: 1.6em;
-    color: white;
-    // background-color: #f0f2f5;
-    background-color: #37de3d; //light-ish green
-    
+    // color: white;
+    // background-color: #37de3d; //light-ish green
+    background-color: #f2f2e6;  //very light grey
 
-`
+    `
+
 
 const LoginContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    
     height: 90vh;
-    // background-color: #f0f2f5; //light grey
-    background-color: #37de3d; //light-ish green
+    // background-color: #f0f2f5; //default grey
+    // background-color: #37de3d; //light-ish green
+    background-color: #f2f2e6;  //very light grey
+
 
 `
 

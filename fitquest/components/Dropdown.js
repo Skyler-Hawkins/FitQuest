@@ -1,69 +1,110 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// Style for dropdown button
-const Dropbtn = styled.button`
-    color: white;
-    padding: 10px;
-    font-size: 15px;
-    border: none;
-    cursor: pointer;
-`;
-
-// Style for dropdown content
-const DropdownContent = styled.div.withConfig({
-    shouldForwardProp: (prop) => prop !== 'show',
-  })`
-    display: ${props => (props.showDropdown ? 'block' : 'none')};
-    position: absolute;
-    background-color: #ffffff;
-    min-width: 85px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-`;
-
-// Style for each content div
-const DropdownItem = styled.div`
-    padding: 10px 5px;
-`;
-
-// Highlight dropdown options on hover
-
-
-// Show the dropdown menu on click
-const HoverDropdown = styled.div`
-    position: relative;
-    background-color: #eaeaea;
-
-`;
-
-// Highlight dropdown button when dropdown menu is open
-const HoverDropbtn = styled(Dropbtn)`
-    background-color: #3d3d7a;
-
-`;
-
-
-export default function Dropdown() {
+export default function PasteDropdown() {
     const [showDropdown, setShowDropdown] = useState(false);
-
-    const toggleDropdown = () => {
-        setShowDropdown(!showDropdown);
-        console.log("dropdown " + showDropdown)
+    const [isClicked, setIsClicked] = useState(false);
+  
+    const handleMouseEnter = () => {
+      if (!isClicked) {
+        setShowDropdown(true);
+      }
     };
-
+  
+    const handleMouseLeave = () => {
+      if (!isClicked) {
+        setShowDropdown(false);
+      }
+    };
+  
+    const handleClick = () => {
+      setIsClicked(!isClicked);
+      setShowDropdown(!showDropdown);
+    };
+  
     return (
-        <span className="dropdown">
-            <HoverDropbtn onClick={toggleDropdown}>Dropdown</HoverDropbtn>
-            <HoverDropdown>
-                <DropdownContent show={showDropdown}>
-                    <DropdownItem>Name</DropdownItem>
-                    <DropdownItem>Age</DropdownItem>
-                    <DropdownItem>Weight</DropdownItem>
-                    <DropdownItem>Height</DropdownItem>
+        <PasteButton onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <Button>
+            Paste &nbsp; ▼
+          </Button>
+          <DropdownContent show={showDropdown}>
+            <DropdownLink id="Age" href="#">Age</DropdownLink>
+            <DropdownLink id="Weight" href="#">Weight</DropdownLink>
+            <DropdownLink id="Height" href="#">Height</DropdownLink>
+          </DropdownContent>
+        </PasteButton>
+      );
+    }
 
-                </DropdownContent>
-            </HoverDropdown>
-        </span>
-    );
-}
+
+
+
+  
+    const Button = styled.button`
+    background-color: #9094ec;
+    color: #212121;
+    padding: 0.8vw 1.2vw;
+    font-size: 1.2vw;
+    font-weight: bold;
+    border: 0.15vw solid transparent;
+    border-radius: 1.2vw;
+    cursor: pointer;
+    transition: 0.1s;
+  
+    &:hover {
+      background-color: #6e72db;
+      color: #6e72db;
+    }
+  
+    &:focus {
+      background-color: #6e72db;
+    //   color: #4CAF50;
+    }
+  `;
+
+    const PasteButton = styled.div`
+    position: relative;
+    display: block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+    &:hover ${Button} {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+  `;
+
+  
+  const DropdownContent = styled.div`
+    display: ${props => (props.show ? 'block' : 'none')};
+    font-size: 1vw;  // Smaller font size
+    position: absolute;
+    z-index: 1;
+    min-width: 16vw;  // Smaller min-width
+    background-color: #9094ec;
+    border: 0.15vw solid #6e72db;  // Smaller border
+    border-radius: 0px 1.2vw 1.2vw 1.2vw;  // Smaller border radius
+    box-shadow: 0px 0.6vw 1.2vw 0px rgba(0,0,0,0.2);  // Smaller box-shadow
+  `;
+  
+  const DropdownLink = styled.a`
+  //   color: #4CAF50;
+    padding: 0.6vw 0.8vw;  // Smaller padding
+    text-decoration: none;
+    display: block;
+    transition: 0.1s;
+  
+    &:hover {
+      background-color: #6e72db;
+      color: #212121;
+      border-radius: 1.2vw;  // Smaller border radius
+
+    }
+  
+    &:focus {
+      background-color: #212121;
+      color: #4CAF50;
+      border-radius: 1.2vw;  // Smaller border radius
+
+    }
+  `;
+  

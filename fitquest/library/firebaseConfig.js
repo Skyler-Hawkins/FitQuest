@@ -23,12 +23,19 @@ let firebase_app;
 
 if (!getApps().length) {
   firebase_app = initializeApp(firebaseConfig);
+  console.log("Firebase initialized")
 } else {
   firebase_app = getApp();
+  console.log("Firebase already initialized")
 }
 
 export const auth = getAuth(firebase_app);
 export const database = getFirestore(firebase_app);
+
+
+console.log("firestore object type:",  database);
+
+
 // export const googleProvider = new GoogleAuthProvider(app).addScope('email');
 if (auth && auth.currentUser) {
   console.log('auth is not null and a user is signed in');

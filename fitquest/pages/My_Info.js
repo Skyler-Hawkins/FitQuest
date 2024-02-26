@@ -8,13 +8,17 @@ import Dropdown from "@/components/Dropdown";
 import backdrop from "@/components/backdrop";
 //for auth
 import firebase_app from "@/library/firebaseConfig";
+import{ database} from "@/library/firebaseConfig";
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import {doc, getDocs, collection, query, where} from 'firebase/firestore';
+
 
 const ParentContainer = styled.div`
 *{
   // padding: 0;
   flex-direction: row;
   font: Roboto;
+  color: black;
   
 }
 `
@@ -23,14 +27,57 @@ const ParentContainer = styled.div`
 
 
 export default function My_Info() {
-  //this will be in every page for now. 
+  //this will be in every page for now.
+  
+  const [displayUser, setUser] = useState("Default");
   const auth = getAuth(firebase_app);
-  console.log("auth: ", auth);
+
+  // console.log("auth: ", auth);
+
+  
+  // useEffect(() => {
+  //   setUser();
+  // }, []);  
     onAuthStateChanged(auth, (user) => {
       if(user)
       {
         console.log('User is signed in');
         console.log(user.email);
+        //here, need to query current user's username
+
+        // const userDocRef = doc(database, `users/${user.email.replace(/\./g, '_')}`);
+        // getDoc(userDocRef)
+        //   .then((userDocSnapshot) => {
+        //     if (userDocSnapshot.exists()) {
+        //       const userData = userDocSnapshot.data();
+        //       console.log(userData.name);
+        //       setUser(userData.name);
+        //     } else {
+        //       console.log(userDocRef)
+        //       console.log("No such document!");
+        //     }
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error getting document:", error);
+        //   });
+        const userRef = collection(database, 'users');
+        const q = query(userRef, where("email", '==', user.email));
+        getDocs(q)
+        .then((querySnapshot) => {
+          console.log("entered:")
+          querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            setUser(doc.data().name);
+          });
+          console.log("exited")
+          
+        })
+        .catch((error) => {
+          console.error("Error getting documents: ", error);
+        });
+        // setUser(currentUser.name);
+
       }
       else
       {
@@ -41,6 +88,7 @@ export default function My_Info() {
     });
 
 
+
     return ( <>
     {/* Need to Pull data from db, have no data nor have the db set up yet, so for now blank */}  
         {/* <backdrop>
@@ -48,12 +96,11 @@ export default function My_Info() {
         </backdrop> */}
         <ParentContainer>
         <NavBar/>
-        the email of the current user is: 
         <TitleContainer>My Info</TitleContainer>
         <BodyContainer>
             <Description>
                 <h1>Your personal stats: </h1>
-                Name: <br/>
+                <p>Current User: {displayUser}  </p>
                 <p> Age: </p>
                 <p> Weight: </p>
                 <p> Height: </p>
@@ -107,6 +154,7 @@ const BodyContainer = styled.div`
   padding-bottom: 5vw;
   background-color: #f2f2e6;  //very light grey
 
+
   
 
 `;
@@ -145,16 +193,14 @@ const Description = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 50vh;
-  width: 95vw;
+  width: 60vw;
   // background-color: #067d0a;
   background-color: #f2f2e6;  //very light grey
 
 
   box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
   border-radius: 3%;
-  margin-right: 2vw;
   margin-bottom: 5vw;
-  margin-left: .1vw;
   padding: 2vw;
   padding-bottom: 5vw;
   font-size: 1.5em;
