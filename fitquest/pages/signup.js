@@ -67,11 +67,9 @@ export default function Login() {
             .catch((error) => {
                 console.error("Error writing document: ", error);
             });
-            setTimeout(() => {}, 2500);
 
-            reRoute = true;
-
-
+            window.location.href = "/";
+        
 
         })
         .catch((error) => {
@@ -86,10 +84,6 @@ export default function Login() {
               
         })
     
-        if(reRoute == true)
-        {
-            window.location.href = "/";
-        }
         // Perform login logic here
 
         
@@ -120,6 +114,7 @@ export default function Login() {
         <TitleContainer>
             <Title>Welcome To FitQuest</Title>
         </TitleContainer>
+        <br/>
        <LoginContainer>
        
           <LoginBox>

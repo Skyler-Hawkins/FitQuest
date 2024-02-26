@@ -4,15 +4,18 @@ import styled from 'styled-components';
 export default function PasteDropdown({displayText, menu1, menu2, menu3, onSelect = () => {} }) {
     const [showDropdown, setShowDropdown] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
+    const [textDisplay, setTextDisplay] = useState(displayText);
   
     const handleMouseEnter = () => {
       if (!isClicked) {
         setShowDropdown(true);
       }
     };
-    const handleLinkClick = (event) => {
+    const handleLinkClick = (event, newDisplay) => {
+      //have the *menu* selection of the dropdown link be the displayed text (displayText)
       const id = event.target.id;
       onSelect(id);
+      setTextDisplay(newDisplay);
       event.preventDefault();
     }
 
@@ -31,12 +34,12 @@ export default function PasteDropdown({displayText, menu1, menu2, menu3, onSelec
     return (
         <PasteButton onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <Button>
-            {displayText}&nbsp; ▼
+            {textDisplay}&nbsp; ▼
           </Button>
           <DropdownContent show={showDropdown}>
-            <DropdownLink id={menu1} href="#" onClick={handleLinkClick} >{menu1}</DropdownLink>
-            <DropdownLink id={menu2} href="#" onClick={handleLinkClick}>{menu2}</DropdownLink>
-            <DropdownLink id={menu3} href="#" onClick={handleLinkClick} >{menu3} </DropdownLink>
+            <DropdownLink id={menu1} href="#" onClick={(event) => handleLinkClick(event, menu1)} >{menu1}</DropdownLink>
+            <DropdownLink id={menu2} href="#" onClick={(event) => handleLinkClick(event, menu2)}>{menu2}</DropdownLink>
+            <DropdownLink id={menu3} href="#" onClick={(event) => handleLinkClick(event, menu3)} >{menu3} </DropdownLink>
           </DropdownContent>
         </PasteButton>
       );
