@@ -14,23 +14,27 @@ const NavBar = () => {
     <Holder>
   
     <LogoBox>
-        
         <NavElement>
             <NavHomeButton> <StyledLink href="/"> FitQuest</StyledLink></NavHomeButton>
         </NavElement>
     </LogoBox>
+    <br/>
     <NavButtonHolder>
         <NavElement>
-            <StyledLink href="/login">Login</StyledLink>
+            <StyledLink href="/">Home</StyledLink>
         </NavElement>
+
         <NavElement>
             <StyledLink href="/My_Info">My Info</StyledLink>
         </NavElement>
         <NavElement>
             <StyledLink href="/Fitness">Fitness</StyledLink>
         </NavElement>
+        <NavElement>
+            <StyledLink href="/login">Login</StyledLink>
+        </NavElement>
     </NavButtonHolder>
-    <br></br>
+    <br/>
     </Holder>
     </Container>
   )
@@ -80,7 +84,7 @@ const NavElement = styled.button`
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 
   &:active {
-    color: #666;
+    color: #9094ec;
     box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
   }
 
@@ -105,22 +109,22 @@ const NavElement = styled.button`
     top: 180%;
     width: 160%;
     height: 190%;
-    background-color: #009087;
+    background-color: #9094ec;
   }
 
   &:hover {
     color: #ffffff;
-    border: 1px solid #009087;
+    border: 1px solid black;
 
     &:before {
       top: -35%;
-      background-color: #009087;
+      background-color: #9094ec;
       transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
     }
 
     &:after {
       top: -45%;
-      background-color: #009087;
+      background-color: #9094ec;
       transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
     }
   }

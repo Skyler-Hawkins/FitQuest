@@ -6,17 +6,8 @@ import {useState, useEffect, useRef} from 'react';
 import firebase_app from "@/library/firebaseConfig";
 import database from "@/library/firebaseConfig";
 import NavBar from "@/components/NavBar";
-import { createGlobalStyle } from 'styled-components';
-import MyGlobalStyle from "@/components/GlobalStyle";
 
 
-// const GlobalStyle = createGlobalStyle`
-//   html, body, #__next {
-//     height: 100%;
-//     background-color: #f2f2e6;  //very light grey
-
-//   }
-// `;
 
 export default function Home() {
   const [quote, setQuote] = useState("Motivational Quote Here");
@@ -51,34 +42,16 @@ const fetchQuotes = async () => {
       {/* This h1 is a LINK to the test JS file  */}
       {/* {/* <h1><Link href="/test">Click to go to Dashboard</Link> </h1> */}
       {/* <Day_Quote/> */}
-      <MyGlobalStyle/>
+
       <ParentContainer>
         <NavBar/>
-        <BodyContainer>
-            <Description>
-                <h3> Embark On Your Fitness Journey </h3>
-                <p>
-                    Discover personalized workout plans, track your progress, and join challenges to stay motivated alongside a community 
-                    of fitness enthusiasts.</p>
-                <GetStartedButton>
-                    <StyledLink href="/signup" >Get Started</StyledLink>
-                </GetStartedButton>
-            </Description>
-            <ImgContainer>
-                <Image src = "FitQuestLogoV4.jpg"/>
-            </ImgContainer> 
-            <Description>
-                <h3>Inspiration For You</h3>
-                <p>{quote}</p>
-                {/* <Day_Quote/> */}
-            </Description>
-    </BodyContainer>
-      {/* <TitleContainer>Welcome To FitQuest!</TitleContainer>
+
+      <TitleContainer>Welcome To FitQuest!</TitleContainer>
       <BodyContainer>
         <BannerImgContainer> 
           <img src= "Fitness_Stock_Image_2.jpg"/>
-        </BannerImgContainer> 
-         <Description>
+        </BannerImgContainer>
+        <Description>
             <h1>About Us</h1> <br/>
             FitQuest is an app designed to help users achieve their fitness goals and compete with friends.
             It provides a platform for users to track their workouts, set goals, and monitor their progress.
@@ -95,15 +68,17 @@ const fetchQuotes = async () => {
                 <img src = "FitQuestLogo.jpg"/>
               </ImgContainer> 
           </StyledLink>
-          <br/> 
-           <Description>
-           
+          <br/>
+          <Description>
+            {/* <TitleContainer>The Fitness Experience</TitleContainer>  */}
             The FitQuest app offers a fitness challenge feature where users can track their progress, set goals, and engage in competitions. It includes personalized workout plans, 
             a library of exercises, and the option to join challenges with others, catering to both beginners and seasoned fitness enthusiasts aiming to reach their fitness potential.
           </Description>
         </DescriptionAndImageContainer>
       </BodyContainer>
- */}
+
+
+
       </ParentContainer>
 
   
@@ -128,17 +103,17 @@ const Container = styled.div`
 
 
 const ParentContainer = styled.div`
-// height: 100%;
-font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   // color: white;
   background-color: #f2f2e6;  //very light grey
-
-//   color: Navy;
+  height: 100%;
+  color: Navy;
 `
 
 const StyledLink = styled.a`
-  color: inherit;
-  text-decoration: none;
+  // color: inherit;
+  // text-decoration: none;
+  height: 40vw;
 `;
 
 const TitleContainer = styled.div`
@@ -153,159 +128,82 @@ const TitleContainer = styled.div`
 const BodyContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
-  align-items: flex-start;
- 
+  flex-direction: column;
+  align-items: center;
   height: 100%;
+  // background-color: #37de3d; //light-ish green
   background-color: #f2f2e6;  //very light grey
-//   position: relative;
-  padding: 0vw;
-  padding-left: 3vw;
-  padding-right: 3vw;
-  overflow: hidden;
-  position: static;
-  overflow-x: auto;  // Add horizontal scrolling when children overflow
-  margin-top: 0;
 
-  
-`;
-
-const GetStartedButton = styled.button`
-  display: inline-block;
-  transition: all 0.2s ease-in;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
-  color: #090909;
-  padding: 0.7em 1.7em;
-  cursor: pointer;
-  font-size: 1.2vw;
-  margin-top: 1.5vw;
-  font-weight: bold;
-  border-radius: 0.8em;
-  background: #e8e8e8;
-  border: 3px solid #e8e8e8;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-
-  &:active {
-    color: #9094ec;
-    box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
-  }
-
-  &:before, &:after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%) scaleY(1) scaleX(1.25);
-    top: 100%;
-    width: 140%;
-    height: 180%;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 50%;
-    display: block;
-    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-    z-index: -1;
-  }
-
-  &:after {
-    left: 55%;
-    transform: translateX(-50%) scaleY(1) scaleX(1.45);
-    top: 180%;
-    width: 160%;
-    height: 190%;
-    background-color: #9094ec;
-  }
-
-  &:hover {
-    color: #ffffff;
-    border: 1px solid black;
-
-    &:before {
-      top: -35%;
-      background-color: #9094ec;
-      transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-    }
-
-    &:after {
-      top: -45%;
-      background-color: #9094ec;
-      transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-    }
-  }
+  
+  
 `;
-// const BodyContainer = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   flex-direction: column;
-//   align-items: center;
-//   height: 100%;
-//   // background-color: #37de3d; //light-ish green
-//   background-color: #f2f2e6;  //very light grey
-
-//   position: relative;
-  
-  
-// `;
 
 
 
+const DescriptionAndImageContainer = styled.div`
+  // margin-top: 6vw;
+  // margin-bottom: 12vw;
+  height: 100vw;
+  // width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  justfiy-content: center;
+  overflow: hidden;  
+
+  `;
 
 
 
-const ImgContainer = styled.div`
-    // display: flex;
-    // justify-content: center;
-    // border-radius: 3%;
-    align-items: center;
-    // transform: scale(1.0);
-    // margin-top: 2vw;
-    // box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
-    width: 24%;
+  const ImgContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    border-radius: 3%;
+    transform: scale(1.1);
+    margin-top: 2vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+    width: 20vw;
     height: 20vw;     
-    // background-color: #042131;
-    // padding: 3vw;
+    background-color: #042131;
+    padding: 3vw;
     // border-top-left-radius: 10px;
     // border-top-right-radius: 10px;
-    margin-bottom: 20vw;
-    position: static;
+  `;
 
-
+  const BannerImgContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align_item
+  border-radius: 3%;
+  border: 1px solid black;
+  transform: scale(1.2);
+  // box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+  // width: 20vw;
+  // height: 20vw;     
+  margin-bottom: 5vw;
+  margin-top: 5vw;                       
+  // margin-right: 10vw;
+  // background-color: #042131;
+  padding: 3vw;
 `;
 
 
-const Image = styled.img`
-  width: inherit;
-  height: inherit;
-  transform: inherit;
-  position: absolute;
-  top: inherit;
-  left: inherit;
-  transform: scale(1.4);
-  
-`;
 
 const Description = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justfiy-content: center;
-  height: 50%;
+  height: 120vh;
   // background-color: #067d0a;
-//   color: Navy;   
+  color: Navy;   
   boxwidth-shadow: 0 0 10px rgba(0, 0, 0, .3); 
   border-radius: 3%;
-//   margin-right: 2vw;
-//   margin-left: .1vw;
-  width: 25%;
+  margin-right: 2vw;
+  margin-left: .1vw;
+  width: 50%;
   padding: 3vw;
-  
-  font-size: 2.0vw;
-  font-size: max(2.0vw, 16px); // Set the minimum font size to 16px
-
+  font-size: 2.4vw;
   font-family: 'Roboto', sans-serif;
-//   min-width: 20vw;
-//   min-height: 30vw;
-  flex-shrink: 0;
-  position: static;
-
 `;

@@ -7,40 +7,10 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import firebase_app from "@/library/firebaseConfig";
 import {database} from "@/library/firebaseConfig";
 import {doc, setDoc, collection, addDoc} from 'firebase/firestore';
-
-
-// AUTHENTICATION FROM SLIDES
-// const email = "user@example.com";
-// const password = "userpassword";
-
-// createUserWithEmailAndPassword(auth, email, password)
-//     .then((userCredential) => {
-//         // Signed in
-//         const user = userCredential.user;
-//         // ...
-//         console.log('User ${user.email} signed up successfully');
-//     })
-//     .catch((error) => {
-//         const errorCode = error.code;
-//         const errorMessage = error.message;
-//         // ..
-//         console.log('Error: ${errorCode} ${errorMessage}');
-          
-//     })
+import MyGlobalStyle from "@/components/GlobalStyle";
 
 
 
-
-
-//  FOR NOW THE SIGN UP PAGE IS A DUPLICATE OF THE LOGIN PAGE ////////////////////////////////
-
-
-// need to pull the input from the text and password Inputs upon the press of the 
-
-// need to define the handleClick function
-function handleClick() {
-    console.log('Button was clicked!');
-}
 
 
 
@@ -72,7 +42,7 @@ export default function Login() {
         console.log('username:', username)
         console.log('email:', email);
         console.log('Password:', password);
-        
+        let reRoute = false;
         // NOTE, i am aware of the issue that if there is a DB issue where the DB doesnt set properly, this user will be assigned
         // without a document in the DB. If time permits, I will come back to this.
         createUserWithEmailAndPassword(auth, email, password)
@@ -83,10 +53,13 @@ export default function Login() {
             console.log(`User ${user.email} signed up successfully`);
 
             //on sign up, need to make a document with the id being the user's userID (will utilize email for this, since will be unique)
-            const newDocData = { name: username, email: email };
+            // SHOULD also put default values in for the user's stats, so no new fields need to be created elsewhere
+            const newDocData = { name: username, email: email, age: "0", weight: "0", height: "0"};
+       
             
             console.log("database: ", database);
             const docRef = doc(database, "users", email);
+            console.log("got docref")
             setDoc(docRef, newDocData)
             .then(() => {
                 console.log("Document successfully written!");
@@ -94,10 +67,9 @@ export default function Login() {
             .catch((error) => {
                 console.error("Error writing document: ", error);
             });
-            setTimeout(() => {}, 1000);
+            setTimeout(() => {}, 2500);
 
-
-            window.location.href = "/";
+            reRoute = true;
 
 
 
@@ -114,7 +86,10 @@ export default function Login() {
               
         })
     
-
+        if(reRoute == true)
+        {
+            window.location.href = "/";
+        }
         // Perform login logic here
 
         
@@ -140,7 +115,7 @@ export default function Login() {
         {/*Next, need to make a sign-up vs sign-in form, 
         make DEFAULT a sign-in page, then button that says
         "Don't have an account? Sign up here!" */}
-        
+        <MyGlobalStyle/>
         <WholeContainer>
         <TitleContainer>
             <Title>Welcome To FitQuest</Title>
@@ -151,7 +126,7 @@ export default function Login() {
             <h1>Input a Desired Username, Email, and Password</h1>
             
                 <InputGroup>
-                    <Input type= "text" placeholder = "Name" ref = {usernameRef}/>
+                    <Input type= "text" placeholder = "Username" ref = {usernameRef}/>
                 </InputGroup>
                 <InputGroup>
                     <Input type= "text" placeholder = "Email" ref = {emailRef}/>
@@ -160,7 +135,7 @@ export default function Login() {
                     <Input type = "password" placeholder = "Password" ref = {passwordRef}/>
                 </InputGroup>
                 <InputGroup>
-                    <LoginButton onClick={(event) => handleLogin(event)}> Sign Up </LoginButton>
+                    <GetStartedButton onClick={(event) => handleLogin(event)}> Sign Up </GetStartedButton>
                 </InputGroup>
                 <InputGroup>
                     <p>{errorMessage}</p>
@@ -191,9 +166,8 @@ const TitleContainer = styled.div`
     // color: white;
     // background-color: #37de3d; //light-ish green
     background-color: #f2f2e6;  //very light grey
-
-    `
-
+    text-align: center;
+    `;
 
 const LoginContainer = styled.div`
     display: flex;
@@ -229,6 +203,7 @@ justify-content: center; // Center the input elements horizontally
 const Input = styled.input`
     width: 100%;
     padding: 5%;
+    border-radius: 0.5vw;
 `
 
 const LoginButton = styled.button`
@@ -248,7 +223,71 @@ const Holder = styled.div`
 
 const Title = styled.h1`
     text-align: center;
- 
+
     font-size: 3.0em;
 
 `
+
+const GetStartedButton = styled.button`
+  display: inline-block;
+  transition: all 0.2s ease-in;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: #090909;
+  padding: 0.7em 1.7em;
+  cursor: pointer;
+  font-size: 1.2vw;
+  margin-top: 1.5vw;
+  font-weight: bold;
+  border-radius: 0.8em;
+  background: #e8e8e8;
+  border: 3px solid #e8e8e8;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+
+  &:active {
+    color: #9094ec;
+    box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+  }
+
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+  }
+
+  &:after {
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    background-color: #9094ec;
+  }
+
+  &:hover {
+    color: #ffffff;
+    border: 1px solid black;
+
+    &:before {
+      top: -35%;
+      background-color: #9094ec;
+      transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+    }
+
+    &:after {
+      top: -45%;
+      background-color: #9094ec;
+      transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+    }
+  }
+`;

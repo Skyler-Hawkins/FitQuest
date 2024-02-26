@@ -6,6 +6,8 @@ import {auth} from '@/library/firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useContext} from 'react';
+import {createGlobalStyle} from 'styled-components';
+import MyGlobalStyle from "@/components/GlobalStyle";
 
 
 
@@ -17,44 +19,6 @@ import { useContext} from 'react';
 
 
 
-
-/*
-const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Check if user is logged in
-    const userLoggedIn = checkUserLoggedIn(); // Replace with your own logic to check if user is logged in
-
-    if (!userLoggedIn) {
-      // Redirect to login page
-      router.push("/login");
-    } else {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  if (!isLoggedIn) {
-    return null; // Render nothing while checking if user is logged in
-  }
-*/
-
-
-
-// need to pull the input from the text and password Inputs upon the press of the 
-
-// need to define the handleClick function
-function handleClick() {
-    console.log('Button was clicked!');
-}
-
-
-
-
-// on button click, need to: 
-// 1) check if user and password are 'correct' (to come later)
-// 2) if correct, redirect to the main page
-// 3) if incorrect, allow form to refresh and show error message
 
 
 export default function Login() {
@@ -80,15 +44,16 @@ export default function Login() {
 
         console.log('email:', email);
         console.log('Password:', password);
-
+        let reRoute = false;
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
             // ...
             // setIsLoggedIn(true);
-            window.location.href = "/";
+
             console.log(`User ${user.email} logged in successfully`);
+            reRoute = true;
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -97,7 +62,12 @@ export default function Login() {
             console.log(`Error: ${errorCode} ${errorMessage}`);
         })
         // Perform login logic here
+
         event.preventDefault();
+        if(reRoute == true)
+        {
+            window.location.href = "/";
+        }
     };
 
     
@@ -115,7 +85,7 @@ export default function Login() {
         <title>Login Page</title>
         </Head>
         
-        
+        <MyGlobalStyle/>
 
         {/*Next, need to make a sign-up vs sign-in form, 
         make DEFAULT a sign-in page, then button that says
@@ -131,7 +101,7 @@ export default function Login() {
             <h1>Enter your username and password below</h1>
             {/* <form> */}
                 <InputGroup>
-                    <Input type= "text" placeholder = "Username" ref = {usernameRef}/>
+                    <Input type= "text" placeholder = "email" ref = {usernameRef}/>
                 </InputGroup>
                 <InputGroup>
                     <Input type = "password" placeholder = "Password" ref = {passwordRef}/>
@@ -139,7 +109,7 @@ export default function Login() {
                 <InputGroup>
                     
 
-                    <LoginButton onClick={(event) => handleLogin(event)}> Log In </LoginButton>
+                    <GetStartedButton onClick={(event) => handleLogin(event)}> Log In </GetStartedButton>
                    
                 </InputGroup>
                 <InputGroup> <p>Don't have an account? <StyledLink href="/signup"> Sign Up Here</StyledLink> </p></InputGroup>
@@ -162,6 +132,69 @@ const StyledLink = styled.a`
     color: blue;
 
   `;
+  const GetStartedButton = styled.button`
+  display: inline-block;
+  transition: all 0.2s ease-in;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: #090909;
+  padding: 0.7em 1.7em;
+  cursor: pointer;
+  font-size: 1.2vw;
+  margin-top: 1.5vw;
+  font-weight: bold;
+  border-radius: 0.8em;
+  background: #e8e8e8;
+  border: 3px solid #e8e8e8;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+
+  &:active {
+    color: #9094ec;
+    box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+  }
+
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+  }
+
+  &:after {
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    background-color: #9094ec;
+  }
+
+  &:hover {
+    color: #ffffff;
+    border: 1px solid black;
+
+    &:before {
+      top: -35%;
+      background-color: #9094ec;
+      transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+    }
+
+    &:after {
+      top: -45%;
+      background-color: #9094ec;
+      transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+    }
+  }
+`;
 
 
 
@@ -197,6 +230,8 @@ const LoginBox = styled.div`
     width: 40%;
     padding: 5%;
     align-items: center;
+    // justify-content: center;
+    text-align: center;
     background-color: white;
     border-radius: 3%;
 
@@ -215,13 +250,14 @@ justify-content: center; // Center the input elements horizontally
 const Input = styled.input`
     width: 100%;
     padding: 5%;
+    border-radius: 0.5vw;
 `
 
-const LoginButton = styled.button`
-    width: 30%;
-    padding: 3%;
-`
-// End of Login CSS
+// const LoginButton = styled.button`
+//     width: 30%;
+//     padding: 3%;
+// `
+// // End of Login CSS
 
 const Holder = styled.div`
     display:flex;

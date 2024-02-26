@@ -2,16 +2,31 @@ import styled from 'styled-components';
 import {useState, useEffect, useRef} from 'react';
 
 const Card = styled.div`
-  width: 50vw;
-  height: 40vw;
- background: rgb(230, 230, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(230, 230, 255, 0.5);
   font-family: inherit;
-  position: relative;
-  border-radius: 8px;
+  position: static;
+  border-radius: 3%;
+  margin-right: 2vw;
+  margin-left: .1vw;
+  width: 28%;
+  padding: 3vw;
+  font-size: 2.0vw;
+  font-size: max(2.0vw, 16px); // Set the minimum font size to 16px
+  font-family: 'Roboto', sans-serif;
+  flex-shrink: 0;
+`;
 
-  &:hover .author {
-    opacity: 1;
-  }
+const BodyText = styled.div`
+    font-size: calc(2vw + .5rem);
+    font-weight: 900;
+    padding: 6vw 4vw 0;
+    position: relative;
+    top: 0;
+    left: 0;
+    line-height: 3.0vw; // Adjust this value as needed
 `;
 
 const Quote = styled.div`
@@ -28,16 +43,7 @@ const CardName = styled.div`
   line-height: 23px;
 `;
 
-const BodyText = styled.div`
-    font-size: calc(2vw + .5rem);
-    font-weight: 900;
-    padding: 6vw 4vw 0;
-    // color: #465512;
-    position: absolute;
-    top: 4vw;
-    left: 1px;
-    line-height: 3.0vw; // Adjust this value as needed
-`;
+
 
 
 

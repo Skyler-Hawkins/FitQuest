@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-export default function PasteDropdown() {
+export default function PasteDropdown({displayText, menu1, menu2, menu3, onSelect = () => {} }) {
     const [showDropdown, setShowDropdown] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
   
@@ -10,6 +10,12 @@ export default function PasteDropdown() {
         setShowDropdown(true);
       }
     };
+    const handleLinkClick = (event) => {
+      const id = event.target.id;
+      onSelect(id);
+      event.preventDefault();
+    }
+
   
     const handleMouseLeave = () => {
       if (!isClicked) {
@@ -25,12 +31,12 @@ export default function PasteDropdown() {
     return (
         <PasteButton onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <Button>
-            Paste &nbsp; ▼
+            {displayText}&nbsp; ▼
           </Button>
           <DropdownContent show={showDropdown}>
-            <DropdownLink id="Age" href="#">Age</DropdownLink>
-            <DropdownLink id="Weight" href="#">Weight</DropdownLink>
-            <DropdownLink id="Height" href="#">Height</DropdownLink>
+            <DropdownLink id={menu1} href="#" onClick={handleLinkClick} >{menu1}</DropdownLink>
+            <DropdownLink id={menu2} href="#" onClick={handleLinkClick}>{menu2}</DropdownLink>
+            <DropdownLink id={menu3} href="#" onClick={handleLinkClick} >{menu3} </DropdownLink>
           </DropdownContent>
         </PasteButton>
       );
@@ -53,12 +59,12 @@ export default function PasteDropdown() {
   
     &:hover {
       background-color: #6e72db;
-      color: #6e72db;
+      color: white;
     }
   
     &:focus {
       background-color: #6e72db;
-    //   color: #4CAF50;
+    //   color: white;
     }
   `;
 
@@ -95,14 +101,14 @@ export default function PasteDropdown() {
   
     &:hover {
       background-color: #6e72db;
-      color: #212121;
+      color: white;
       border-radius: 1.2vw;  // Smaller border radius
 
     }
   
     &:focus {
-      background-color: #212121;
-      color: #4CAF50;
+      background-color: #6e72db;
+      color: white;
       border-radius: 1.2vw;  // Smaller border radius
 
     }

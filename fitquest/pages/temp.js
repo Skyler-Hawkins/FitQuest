@@ -7,18 +7,19 @@ import firebase_app from "@/library/firebaseConfig";
 import database from "@/library/firebaseConfig";
 import NavBar from "@/components/NavBar";
 import { createGlobalStyle } from 'styled-components';
-import MyGlobalStyle from "@/components/GlobalStyle";
+import Day_Quote from "@/components/Day_Quote";
 
 
-// const GlobalStyle = createGlobalStyle`
-//   html, body, #__next {
-//     height: 100%;
-//     background-color: #f2f2e6;  //very light grey
 
-//   }
-// `;
+const GlobalStyle = createGlobalStyle`
+  html, body, #__next {
+    height: 100%;
+    background-color: #f2f2e6;  //very light grey
 
-export default function Home() {
+  }
+`;
+
+export default function temp() {
   const [quote, setQuote] = useState("Motivational Quote Here");
   useEffect(() => {
     fetchQuotes();
@@ -51,7 +52,7 @@ const fetchQuotes = async () => {
       {/* This h1 is a LINK to the test JS file  */}
       {/* {/* <h1><Link href="/test">Click to go to Dashboard</Link> </h1> */}
       {/* <Day_Quote/> */}
-      <MyGlobalStyle/>
+      <GlobalStyle/>
       <ParentContainer>
         <NavBar/>
         <BodyContainer>
@@ -288,7 +289,6 @@ const Description = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justfiy-content: center;
   height: 50%;
   // background-color: #067d0a;
 //   color: Navy;   

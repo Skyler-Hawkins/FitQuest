@@ -5,15 +5,17 @@ import React from 'react';
 
 // pulled from UIVERSE, converted to styled components via gpt
 const Input = styled.input`
-  border: 2px solid transparent;
-  width: 15em;
-  height: 2.5em;
+
+  // border: 2px solid transparent;
+  width: 25em;
+  height: 4em;
   padding-left: 0.8em;
-  outline: none;
+  // outline: none;
   overflow: hidden;
   background-color: #F3F3F3;
   border-radius: 10px;
   transition: all 0.5s;
+  border: 2px solid black;
 
   &:hover,
   &:focus {
@@ -33,10 +35,10 @@ const Label = styled.label`
 
 
 
-const InputBox = () => {
+const InputBox = ({disabled, id}) => {
     return (
         <Container>
-            <Input required type="text" name="Update_Label" className="input" placeholder="Input Here" />
+            <Input id = {id} required type="text" name="Update_Label" className="input" placeholder="Input Here" disabled={disabled}/>
         </Container>
     );
 };
