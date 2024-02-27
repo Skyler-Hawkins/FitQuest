@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+// 
+
 export default function GetStartedButton({ id, selected1,selected2,selected3, onClick }) {
   return (
     <GettStartedButton id = {id} disabled = {!(selected1 && selected2 && selected3)}  onClick={onClick}> {id} </GettStartedButton>

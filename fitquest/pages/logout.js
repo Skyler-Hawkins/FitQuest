@@ -1,68 +1,33 @@
-import Head from "next/head";
 import styled from 'styled-components';
 import React from 'react';
 import {useState, useEffect, useRef} from 'react';
 import {auth} from '@/library/firebaseConfig';
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useContext} from 'react';
-import {createGlobalStyle} from 'styled-components';
-import MyGlobalStyle from "@/components/GlobalStyle";
-import {useRouter} from 'next/router';
+import MyGlobalStyle from '@/components/GlobalStyle';
+import {getAuth, signOut} from 'firebase/auth';
 
+export default function Logout() {
 
-// AUTHENTICATION FROM SLIDES
-// const email = "user@example.com"; // pull from text-boxes
-// const password = "userpassword";
-
-
-
-
-
-
-
-export default function Login() {
     //DEFINING HOOKS (first for button)
     // also. since in a form group, will refresh page every time button is clicked
-    const [errorMessage, setErrorMessage] = useState("");
+
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
-    const router = useRouter();
+    
     // const auth = useContext(AuthContext)
     
-    const handleLogin = (event) => {
-        event.preventDefault();
-    
-        const email = usernameRef.current.value;
-        const password = passwordRef.current.value;
-    
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(`User ${user.email} logged in successfully`);
-    
-            // Redirect the user after they've logged in
-            setErrorMessage("Logged in successfully, redirecting...")
-            setTimeout(() => {
-                // Code to be executed after 2.5 seconds
-            }, 2500);
-
-            router.push('/');
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(`Error: ${errorCode} ${errorMessage}`);
-          });
+    const {isLoggedIn, setIsLoggedIn} = auth;
+    const handleLogout = () => {
+        const auth = getAuth();
+        signOut(auth).then(() => {
+          console.log('User signed out');
+        }).catch((error) => {
+          console.error('Error signing out: ', error);
+        });
       };
-
-
     return (
         <>
-        <Head>
-            {/* Put meta-information here, likely to need that */}
-        <title>Login Page</title>
-        </Head>
+
         
         <MyGlobalStyle/>
 
@@ -77,40 +42,32 @@ export default function Login() {
        <LoginContainer>
        
           <LoginBox>
-            <h1>Enter your username and password below</h1>
+            <h1>Are you sure you want to log out?</h1>
             {/* <form> */}
                 <InputGroup>
-                    <Input type= "text" placeholder = "email" ref = {usernameRef}/>
-                </InputGroup>
-                <InputGroup>
-                    <Input type = "password" placeholder = "Password" ref = {passwordRef}/>
-                </InputGroup>
-                <InputGroup>
-                    
-
-                    <GetStartedButton onClick={(event) => handleLogin(event)}> Log In </GetStartedButton>
+                
+                    <GetStartedButton onClick={(event) => handleLogout(event)}> Log Out </GetStartedButton>
                    
                 </InputGroup>
                 <InputGroup> <p>Don't have an account? <StyledLink href="/signup"> Sign Up Here</StyledLink> </p></InputGroup>
-                <p>{errorMessage}</p>
             {/* </form> */}
           </LoginBox>
          
        </LoginContainer>
        </WholeContainer>
         </>
-    )
-
+    );
 }
+
 
 // CSS FOR THE LOGIN PAGE
 // should replace pixel paddings with relative sizing measurements     
 const StyledLink = styled.a`
-text-decoration: none;
-color: blue;
-`;
+//  color: inherit;
+    text-decoration: none;
+    color: blue;
 
-
+  `;
   const GetStartedButton = styled.button`
   display: inline-block;
   transition: all 0.2s ease-in;
@@ -176,37 +133,47 @@ color: blue;
 `;
 
 
+
+
 const WholeContainer = styled.div`
     height: 100%;
 
-`;
+`
+
 
 
 const TitleContainer = styled.div`
     font-size: 1.6em;
+    // color: white;
+    // background-color: #37de3d; //light-ish green
     background-color: #f2f2e6;  //very light grey
-`;
 
+    `
 
 const LoginContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     height: 90vh;
+    // background-color: #f0f2f5; //default grey
+    // background-color: #37de3d; //light-ish green
     background-color: #f2f2e6;  //very light grey
-`;
 
+
+`
 
 const LoginBox = styled.div`
     width: 40%;
     padding: 5%;
     align-items: center;
+    // justify-content: center;
     text-align: center;
     background-color: white;
     border-radius: 3%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .4);                             
-`;
 
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);                             
+
+`
 
 const InputGroup = styled.div`
 width: 100%; // Ensure input group takes full width of parent
@@ -216,13 +183,17 @@ display: flex;
 justify-content: center; // Center the input elements horizontally
 `;
 
-
 const Input = styled.input`
     width: 100%;
     padding: 5%;
     border-radius: 0.5vw;
-`;
+`
 
+// const LoginButton = styled.button`
+//     width: 30%;
+//     padding: 3%;
+// `
+// // End of Login CSS
 
 const Holder = styled.div`
     display:flex;
@@ -230,9 +201,12 @@ const Holder = styled.div`
     background-color: grey;
     justify-content: space-between;
     padding: 1vw;
-`;
+`
+
 
 const Title = styled.h1`
     text-align: center;
+ 
     font-size: 3.0em;
-`;
+
+`

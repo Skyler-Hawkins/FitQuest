@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+// Very nice dropdown menu
+// used several times, I made it modular to support different naming and elements
+
+
 export default function PasteDropdown({displayText, menu1, menu2, menu3, onSelect = () => {} }) {
     const [showDropdown, setShowDropdown] = useState(false);
     const [isClicked, setIsClicked] = useState(false);

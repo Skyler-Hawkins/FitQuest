@@ -8,6 +8,7 @@ import firebase_app from "@/library/firebaseConfig";
 import {database} from "@/library/firebaseConfig";
 import {doc, setDoc, collection, addDoc} from 'firebase/firestore';
 import MyGlobalStyle from "@/components/GlobalStyle";
+import {useRouter} from 'next/router';
 
 
 
@@ -24,70 +25,51 @@ import MyGlobalStyle from "@/components/GlobalStyle";
 export default function Login() {
     //DEFINING HOOKS (first for button)
     // also. since in a form group, will refresh page every time button is clicked
-
+    const router = useRouter();
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
     const emailRef = useRef(null);
     const [errorMessage, setErrorMessage] = useState(null);
 
     const handleLogin = (event) => {
-
-        // need to figure out how to conditionally prevent this. if password is
-        // incorrect, then prevent default. if correct, then allow refresh
         event.preventDefault();
-
+    
         const username = usernameRef.current.value;
-        const email = emailRef.current.value;
+        const email = emailRef.current.value.toLowerCase();
         const password = passwordRef.current.value;
-        console.log('username:', username)
-        console.log('email:', email);
-        console.log('Password:', password);
-        let reRoute = false;
-        // NOTE, i am aware of the issue that if there is a DB issue where the DB doesnt set properly, this user will be assigned
-        // without a document in the DB. If time permits, I will come back to this.
+    
         createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in
+          .then((userCredential) => {
             const user = userCredential.user;
-            // ...
             console.log(`User ${user.email} signed up successfully`);
-
-            //on sign up, need to make a document with the id being the user's userID (will utilize email for this, since will be unique)
-            // SHOULD also put default values in for the user's stats, so no new fields need to be created elsewhere
+    
             const newDocData = { name: username, email: email, age: "0", weight: "0", height: "0"};
-       
-            
-            console.log("database: ", database);
             const docRef = doc(database, "users", email);
-            console.log("got docref")
+    
             setDoc(docRef, newDocData)
-            .then(() => {
+              .then(() => {
                 console.log("Document successfully written!");
-            })
-            .catch((error) => {
+                
+                setErrorMessage("Signed up successfully, redirecting...");
+                setTimeout(() => {
+                    // Code to be executed after 2.5 seconds
+                }, 2500);
+                // Redirect the user after they've signed up
+                router.push('/');
+              })
+              .catch((error) => {
                 console.error("Error writing document: ", error);
-            });
-
-            window.location.href = "/";
-        
-
-        })
-        .catch((error) => {
+              });
+          })
+          .catch((error) => {
             setErrorMessage(null);
             const errorCode = error.code;
             const errorMessage = error.message;
-            // ..
             console.log(`Error: ${errorCode} ${errorMessage}`);
             setTimeout(() => {}, 1000);
             setErrorMessage("invalid email/password combination");
-            
-              
-        })
-    
-        // Perform login logic here
-
-        
-    };
+          });
+      };
 
     
 
