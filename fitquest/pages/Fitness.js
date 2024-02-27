@@ -221,10 +221,14 @@ export default function Fitness() {
         );
     }
 
+// The CSS in this file is no different from the others, somewhat redundant yet would be highly
+// time consuming to modularize, and I decided to focus on the quality of the website
+
 const StyledA = styled.a`
   color: inherit;
   text-decoration: none;
 `;
+
 
 const ExerciseDescriptionButton = styled.button`
 width: 7vw;  // relative to viewport width
@@ -247,66 +251,8 @@ font-family: 'Montserrat', sans-serif;
   font-size: 1.5vw;  // relative to parent font size
 }
 `;
-// const ExerciseDescriptionButton = styled.button`
 
-//   display: inline-block;
-//   transition: all 0.2s ease-in;
-//   position: relative;
-//   overflow: hidden;
-//   z-index: 1;
-//   color: #090909;
-//   padding: 0.7em 1.7em;
-//   cursor: pointer;
-//   font-size: 1.2vw;
-//   // margin-top: 1.5vw;
-//   margin-bottom: .5vw;
-//   margin-right: 2vw;
-//   font-weight: bold;
-//   border-radius: 0.8em;
-//   background: #e8e8e8;
-//   border: 3px solid #e8e8e8;
 
-//   &:before, &:after {
-//     content: "";
-//     position: absolute;
-//     left: 50%;
-//     transform: translateX(-50%) scaleY(1) scaleX(1.25);
-//     top: 100%;
-//     width: 140%;
-//     height: 180%;
-//     background-color: rgba(0, 0, 0, 0.05);
-//     border-radius: 50%;
-//     display: block;
-//     transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-//     z-index: -1;
-//   }
-
-//   &:after {
-//     left: 55%;
-//     transform: translateX(-50%) scaleY(1) scaleX(1.45);
-//     top: 180%;
-//     width: 160%;
-//     height: 190%;
-//     background-color: #9094ec;
-//   }
-
-//   &:hover {
-//     color: #ffffff;
-//     border: 1px solid black;
-
-//     &:before {
-//       top: -35%;
-//       background-color: #9094ec;
-//       transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-//     }
-
-//     &:after {
-//       top: -45%;
-//       background-color: #9094ec;
-//       transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-//     }
-//   }
-// `;
 const SetAndButtonRow = styled.div`
 display: flex;
 width: 100%;
@@ -316,7 +262,7 @@ color: inherit;
 justify-content: space-between;
 align-items: center;
 
-`
+`;
 
 
 const ExerciseContainer = styled.div`
@@ -324,7 +270,7 @@ width: 80%;
 font-size: 1.0em;
 border: 5px solid purple;
 padding: .5vw;
-border-radius: 20%;
+border-radius: 10%;
 transition: color 0.3s ease, font-weight 0.3s ease;
 
 &:hover {
@@ -333,43 +279,33 @@ transition: color 0.3s ease, font-weight 0.3s ease;
 }
 `;
 
-// background-color: #f2f2e6;  //very light grey
 
-
-  
-  const ExerciseColumn = styled.div`
-    // flex: 1;
-  `;
-  
 const ExerciseName = styled.h2`
   color: #333;
   font-size: 2.0vw;
 `;
   
-  const ExerciseSets = styled.p`
-    color: #666;
-    font-size: 1.8vw;
-  `;
-  
-  const ExerciseInstructions = styled.div`
-    color: #666;
-    font-size: 1.2vw;
-    // border: 1px solid purple;
-  
 
-  `;
+const ExerciseSets = styled.p`
+  color: #666;
+  font-size: 1.8vw;
+`;
+
+
+const ExerciseInstructions = styled.div`
+  color: #666;
+  font-size: 1.2vw;
+`;
+
+
 const TitleContainer = styled.div`
 font-size: 5.0vw;
 padding: 3vw;
 align-items: center;
 justify-content: center;
 text-align: center;
-// background-color: #37de3d; //light-ish green
 background-color: #f2f2e6;  //very light grey
-
 `;
-
-
 
 
 const BodyContainer = styled.div`
@@ -384,11 +320,8 @@ width: 100%;
 position: relative;
 padding-bottom: 5vw;
 background-color: #f2f2e6;  //very light grey
-
-
-
-
 `;
+
 
 const DescriptionAndImageContainer = styled.div`
 margin-top: 6vw;
@@ -396,10 +329,7 @@ margin-bottom: 12vw;
 display: flex;
 justify-content: space-between;
 align-items: center;
-
-
 `;
-
 
 
 const ImgContainer = styled.div`
@@ -418,24 +348,6 @@ padding: 3vw;
 `;
 
 
-// const Description = styled.div`
-// display: flex;
-// flex-direction: column;
-// justify-content: space-between;
-// align-items: center;
-// height: 60vh;
-// width: 50vw;
-// // background-color: #067d0a;
-// background-color: #f2f2e6;  //very light grey
-// box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
-// border-radius: 3%;
-// margin-bottom: 5vw;
-// padding: 2vw;
-// padding-bottom: 5vw;
-// font-size: 1.5em;
-// font-family: 'Roboto', sans-serif;
-// `;
-// const Description = styled.div`
 const Description = styled.div`
   display: flex;
   flex-direction: column;
@@ -443,8 +355,8 @@ const Description = styled.div`
   align-items: center;
   height: 60vh;
   width: 50vw;
-  background: linear-gradient(to right, #fae2cf, #faf0e8); // Light gradient
-  border: 3px solid #ff7e5f; // Solid border
+  background: linear-gradient(to right, #b5b8f5, #c4c6f5); // Light gradient
+  border: 3px solid Black; // Solid border
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); // Shadow for 3D effect
   border-radius: 3%;
   margin-bottom: 5vw;
@@ -453,6 +365,8 @@ const Description = styled.div`
   font-size: 1.5em;
   font-family: 'Roboto', sans-serif;
   `;
+
+
 const ExerciseInstructionsDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -460,8 +374,8 @@ const ExerciseInstructionsDiv = styled.div`
   align-items: center;
   min-height: 60vh; /* Modified property */
   width: 50vw;
-  background: linear-gradient(to right, #fae2cf, #faf0e8); // Light gradient
-  border: 3px solid #ff7e5f; // Solid border
+  background: linear-gradient(to right, #b5b8f5, #c4c6f5); // Light gradient
+  border: 3px solid black; // Solid border
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); // Shadow for 3D effect
   border-radius: 3%;
   margin-bottom: 5vw;
@@ -470,6 +384,8 @@ const ExerciseInstructionsDiv = styled.div`
   font-size: 1.5em;
   font-family: 'Roboto', sans-serif;
 `;
+
+
 const DescriptionForExercise = styled.div`
 display: flex;
 flex-direction: column;
@@ -478,8 +394,8 @@ align-items: center;
 height: 50vh;
 width: 50vw;
 // background-color: #067d0a;
-background: linear-gradient(to right, #fae2cf, #faf0e8); // Light gradient
-border: 3px solid #ff7e5f; // Solid border
+background: linear-gradient(to right, #b5b8f5, #c4c6f5); // Light gradient
+border: 3px solid black; // Solid border
 box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); // Shadow for 3D effect
 box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
 border-radius: 3%;
@@ -489,96 +405,20 @@ padding-bottom: 5vw;
 font-size: 1.5em;
 font-family: 'Roboto', sans-serif;
 `;
-const InfoUpdateWindow = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-align-items: center;
-height: 80vh;
-width: 60vw;
-// background-color: #067d0a;
-background-color: #f2f2e6;  //very light grey
-box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
-border-radius: 3%;
-margin-bottom: 5vw;
-padding: 2vw;
-padding-bottom: 5vw;
-font-size: 1.5em;
-font-family: 'Roboto', sans-serif;
-`;
 
 
-
-
-const ChangeInfoButton = styled.button`
-display: inline-block;
-transition: all 0.2s ease-in;
-position: relative;
-overflow: hidden;
-z-index: 1;
-color: #090909;
-padding: 0.7em 1.7em;
-cursor: pointer;
-font-size: 1.2vw;
-margin-top: 1.5vw;
-font-weight: bold;
-border-radius: 0.8em;
-background: #e8e8e8;
-border: 3px solid #e8e8e8;
-box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-
-&:active {
-color: #9094ec;
-box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
-}
-
-&:before, &:after {
-content: "";
-position: absolute;
-left: 50%;
-transform: translateX(-50%) scaleY(1) scaleX(1.25);
-top: 100%;
-width: 140%;
-height: 180%;
-background-color: rgba(0, 0, 0, 0.05);
-border-radius: 50%;
-display: block;
-transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-z-index: -1;
-}
-
-&:after {
-left: 55%;
-transform: translateX(-50%) scaleY(1) scaleX(1.45);
-top: 180%;
-width: 160%;
-height: 190%;
-background-color: #9094ec;
-}
-
-&:hover {
-color: #ffffff;
-border: 1px solid black;
-
-&:before {
-  top: -35%;
-  background-color: #9094ec;
-  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-}
-
-&:after {
-  top: -45%;
-  background-color: #9094ec;
-  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-}
-}
-`;
 
 const WorkoutButtons = styled.div`
 display: flex;
 flex-direction: row;
-`
-// want a sideways series of dropdown boxes that give the user several selection criteria , make it fancy and pretty,
+`;
+
+
+
+
+// MISC NOTES FROM THE DEVELOPMENT OF THIS FILE, Left here so whoever sees can see my thought process during dev time
+
+// want a sideways series of dropdown boxes that give the user several selection criteria 
 // for now I will just use the default buttons that I have been
 // Based on user input, will construct a function that takes that and converts it to suitable query for the API, queries,
 // then outputs the workout as a display to the user
