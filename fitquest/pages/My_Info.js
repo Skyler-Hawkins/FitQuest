@@ -78,6 +78,8 @@ export default function My_Info() {
       }
     });
   }, []);
+
+  
   const handleSubmission = (event) => {
     //The WRITE operation for the database, using updateDoc to ensure no duplicates of user info such as height or weight
     console.log("Submission attempt made"); 
@@ -96,6 +98,10 @@ export default function My_Info() {
       [field]: value
     })
     .then(() => {
+      setUser(displayUser);
+      setAge(displayAge);
+      setWeight(displayWeight);
+      setHeight(displayHeight);
       console.log('Document successfully updated!');
       setErrorMessage("Document successfully updated!")
     })
